@@ -1,47 +1,47 @@
-# Workflow
+# 工作流
 
-## Standard flow
+## 标准流程
 
-1. Understand the requested capability and confirm it is skill-worthy.
-2. Collect the minimum creation inputs:
+1. 先理解用户要沉淀的能力，确认这件事是否值得做成 skill。
+2. 收集最小创建输入：
    - skill id
-   - display name
-   - one-line summary
-   - whether style rules are needed
-3. Call `./scripts/create-skill <skill-id> <display-name> <summary> [--style yes|no]`.
-4. Open the generated starter files under `skills/<skill-id>/core/`.
-5. Replace the starter TODO blocks with real reusable source content.
-6. Re-run `./scripts/build <skill-id>` after refinement.
-7. Re-run `./scripts/doctor <skill-id>` and report readiness.
+   - 展示名称
+   - 一句话摘要
+   - 是否需要视觉风格规则
+3. 调用 `./scripts/create-skill <skill-id> <display-name> <summary> [--style yes|no]`。
+4. 打开生成后的 `skills/<skill-id>/core/` starter 文件。
+5. 用真实、可复用的规则替换 starter 里的 TODO 块。
+6. 执行 `./scripts/build <skill-id>` 重新生成 adapters。
+7. 执行 `./scripts/doctor <skill-id>` 做完整性检查，并汇报 readiness。
 
-## Skill-worthiness check
+## 是否值得做成 skill
 
-Create a skill when at least one of these is true:
+当满足以下任一条件时，应该做成 skill：
 
-- the workflow is repeated often
-- the workflow has non-obvious steps or decision rules
-- the team needs consistent outputs across projects
-- adapters or tooling differ by platform but the core knowledge is shared
+- 这个工作流会被重复执行
+- 工作流里存在不明显的步骤或判断规则
+- 团队希望在不同项目里保持产出一致
+- 不同工具的 adapter 形式不同，但核心知识是共享的
 
-Do not create a skill when the content is just a one-off project note.
+如果内容只是一次性项目笔记，不要硬做成 skill。
 
-## Orchestration rule
+## 编排规则
 
-Do not ask the user to create files manually when the repository scripts can do it.
+当仓库脚本可以完成结构化动作时，不要再让用户手工建文件。
 
-Prefer this order:
+推荐顺序永远是：
 
-1. call `create-skill`
-2. refine generated `core/*.md`
-3. rebuild
-4. doctor check
+1. 先调用 `create-skill`
+2. 再补全 `core/*.md`
+3. 然后 rebuild
+4. 最后 doctor 检查
 
-## Output contract
+## 输出约定
 
-When helping create a new skill, produce in this order:
+当你帮助用户创建新 skill 时，优先按这个顺序组织结果：
 
-1. creation inputs
-2. confirmation that `create-skill` should be called
-3. refined `core/*.md` content
-4. validation scenarios
-5. readiness summary
+1. 创建输入确认
+2. 确认将调用 `create-skill`
+3. 补全后的 `core/*.md` 内容
+4. 校验场景
+5. readiness 总结

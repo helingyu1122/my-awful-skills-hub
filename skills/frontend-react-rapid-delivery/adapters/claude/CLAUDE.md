@@ -1,75 +1,76 @@
-# Frontend React Rapid Delivery
+# React 企业前端快速交付
 
-React-first enterprise frontend design, prototype, and page delivery workflow.
+面向企业中后台的 React 前端设计、原型与页面交付工作流。
 
-## Intent
+## 意图
 
-# Intent
+# 意图
 
-This skill is for React-first enterprise frontend work in front/back-end separated projects.
+这个 skill 用于前后端分离项目中的 React 企业前端工作，重点覆盖中后台设计、原型确认、脚手架规划与页面落地。
 
-## Use it for
+## 适用场景
 
-- enterprise admin-system scaffolding
-- page prototypes from short prompts
-- page-to-code delivery
-- design-token based UI rules
-- stable workflows for React admin apps
-- optional marketing pages when secondary to admin needs
+- 企业中后台或管理系统脚手架设计
+- 根据几句话快速产出页面原型
+- 原型确认后的页面开发与模块拆分
+- 基于 design token 的一致性界面规范
+- 团队沉淀稳定的 React 中后台交付流程
+- 次要覆盖官网内容页，但不让官网需求反客为主
 
-## Default assumptions
+## 默认假设
 
-- Prefer `React + TypeScript + Vite`
-- Primary target is `admin/back-office SPA`
-- Secondary target is `marketing/content pages`
-- Keep backend concerns out unless explicitly requested
-- Treat concrete projects as validation samples, not as the skill's permanent shape
+- 默认技术基线为 `React + TypeScript + Vite`
+- 主要目标是 `admin/back-office SPA`
+- 官网或内容站只是补充场景，不是主战场
+- 未明确要求时，不主动展开后端实现细节
+- 具体项目只作为验证样本，不应反向固化 skill 的边界
 
-## Typical outputs
+## 典型产出
 
-- visual decision card
-- stack and scaffold proposal
-- route and module tree
-- page prototype description
-- component inventory
-- API docking assumptions
+- 视觉决策卡
+- 技术栈与脚手架建议
+- 路由与模块树
+- 页面原型说明
+- 页面模式归类
+- 可复用组件清单
+- API 对接边界假设
 
-## Workflow
+## 工作流
 
-# Workflow
+# 工作流
 
-## Standard flow
+## 标准流程
 
-Use this flow when the user wants speed and reuse from short prompts.
+当用户希望根据短描述快速得到稳定、可复用的前端方案时，按下面流程执行：
 
-1. Interpret the business request.
-2. Convert it into a frontend-facing brief.
-3. Convert visual input into a visual decision card when needed.
-4. Produce a prototype summary before heavy coding.
-5. Confirm or revise the prototype.
-6. Generate scaffold or page code.
-7. Leave clear API docking points for later backend integration.
-8. Evaluate the result against the validation checklist and feed learnings back into the skill.
+1. 先理解业务目标、角色、模块和页面重点。
+2. 把业务描述转成前端可落地的 brief。
+3. 如果用户提到风格、参考产品或图片，先输出视觉决策卡。
+4. 在写大量代码前，先给原型摘要。
+5. 根据用户反馈确认或修正原型。
+6. 再生成脚手架方案、页面结构或前端代码。
+7. 明确保留后续 API 对接点，保证前后端分离。
+8. 最后用校验清单回看结果，把发现沉淀回 skill。
 
-## Frontend-facing brief
+## 前端 brief 拆解
 
-From a short business request, derive:
+从一句或几句业务描述中，至少要补全这些前端视角信息：
 
-- user roles
-- page modules
-- main entities
-- core actions
-- high-risk interactions
-- permission-sensitive areas
-- table-heavy vs form-heavy vs dashboard-heavy ratio
-- whether the workflow contains `draft`, `validate`, `publish`, `rollback`, or `audit` states
-- whether the workflow contains `assignment`, `SLA`, `timeout`, `review action`, or `material preview` states
+- 主要使用角色
+- 页面模块
+- 核心实体
+- 关键动作
+- 高风险交互
+- 权限敏感区域
+- 表格密集 / 表单密集 / 仪表盘密集的比例
+- 是否存在 `草稿`、`校验`、`发布`、`回滚`、`审计` 等状态
+- 是否存在 `指派`、`SLA`、`超时`、`审核动作`、`材料预览` 等流程节点
 
-## Visual intake
+## 视觉输入处理
 
-If the user expresses style in plain language, example products, or images, normalize it before prototyping.
+如果用户通过自然语言、参考产品或图片表达风格，不要直接追问设计术语，而是先做归一化。
 
-Translate inputs such as:
+需要把类似下面的输入：
 
 - `稳重`
 - `像飞书后台`
@@ -77,175 +78,125 @@ Translate inputs such as:
 - `高级一点`
 - `参考这张图`
 
-into a visual decision card with:
+转成一张视觉决策卡，明确：
 
-- style keywords
-- density level
-- navigation style
-- surface style
-- table and form treatment
-- chart temperament
-- forbidden visual traits
+- 风格关键词
+- 信息密度
+- 导航方式
+- 表面层级
+- 表格与表单处理方式
+- 图表气质
+- 禁止出现的视觉特征
 
-## Prototype output contract
+## 原型输出约定
 
-Before writing a lot of code, produce:
+在大规模写代码之前，先输出：
 
-- one-sentence product goal
-- visual decision card when style matters
-- page map
-- route tree
-- page archetype mapping
-- each page's purpose
-- key components
-- key interactions
-- design tone
+- 一句话产品目标
+- 视觉决策卡（风格相关时）
+- 页面地图
+- 路由树
+- 页面模式映射
+- 各页面职责
+- 关键组件
+- 关键交互
+- 设计调性说明
 
-When listing components, split them into:
+组件清单需要拆成两类：
 
-- shared reusable components
-- business assembly components
+- 可跨项目复用的共享组件
+- 带业务语义的装配组件
 
-This reduces accidental overfitting to one domain.
+## 代码生成顺序
 
-## Visual decision card contract
-
-When included, keep it compact and concrete.
-
-Recommended fields:
-
-- `style keywords`
-- `reference feel`
-- `palette direction`
-- `typography tone`
-- `density`
-- `navigation choice`
-- `table/form style`
-- `chart style`
-- `do not do`
-
-Example shape:
-
-```md
-Goal: Build an operations dashboard for merchant onboarding.
-
-Routes:
-- /dashboard
-- /merchants
-- /merchants/:id
-- /approvals
-
-Pages:
-- Dashboard: KPI cards + trend charts + pending queue
-- Merchants: filterable table + bulk actions
-- Merchant Detail: profile, risk notes, operation log
-- Approvals: review queue + detail drawer
-```
-
-## Code generation order
-
-Generate in this order unless the user requests otherwise:
+除非用户另有要求，否则按下面顺序生成：
 
 1. app shell
 2. routes
-3. shared layout
-4. token file and theme rules
-5. base business components
-6. page skeletons
-7. mock service layer
-8. tests for critical pages
+3. 通用 layout
+4. tokens 与主题规则
+5. 基础业务组件
+6. 页面骨架
+7. mock service 层
+8. 关键页面测试基线
 
-## API separation rules
+## 前后端分离规则
 
-Keep front/back-end separation explicit:
+- 请求客户端收敛在 `src/services`
+- 类型定义收敛在 `src/types` 或生成合同目录
+- 页面层不散落原始 fetch 逻辑
+- mock 数据和真实 API adapter 可以互换
 
-- isolate request clients under `src/services`
-- isolate types under `src/types` or generated contracts
-- never spread raw fetch logic across pages
-- keep mock data and live API adapters swappable
-
-Preferred request split:
+推荐拆分：
 
 - `services/http`
 - `services/modules/*`
 - `mocks/*`
 
-## Prototype-first rule
+## Prototype-first 规则
 
-When the prompt is vague, do not jump straight into polished code. First create a compact prototype plan. This reduces churn and makes later code generation more stable.
+当需求描述模糊时，不要直接输出一大段精修代码，而是先给一个紧凑、可确认的原型方案。这样能显著降低返工率。
 
-## Reuse-first rule
+## Reuse-first 规则
 
-Do not treat each request as a brand-new design exercise. First map the request to reusable archetypes such as:
+不要把每次请求都当成全新设计题。优先映射到可复用的企业中后台页面模式，例如：
 
-- list + filters + bulk actions
-- detail + tabs + timeline
-- form + steps + validation
-- dashboard + KPI + trend + ranking
-- review queue + drawer + audit log
+- 列表 + 筛选 + 批量操作
+- 详情 + 分组信息 + 时间线
+- 表单 + 分步/分组 + 校验
+- 仪表盘 + KPI + 趋势 + 分布
+- 审核队列 + 侧边详情 + 审计日志
 
-Only add custom structures when the archetypes do not cover the need.
+只有当这些模式无法覆盖需求时，再引入定制结构。
 
-## Admin system defaults
+## 中后台默认规范
 
-For admin pages, prefer:
+默认优先：
 
-- clear information density
-- obvious filter and search zones
-- stable table behavior
-- detail drawers and modals used sparingly
-- action grouping by task priority
+- 清晰的信息密度
+- 明确的筛选与搜索区
+- 稳定的表格行为
+- 克制使用抽屉和弹窗
+- 按优先级分组操作按钮
 
-For users without design background, prefer to explain visual choices in plain language instead of abstract design jargon.
+对缺乏设计背景的用户，视觉解释要尽量使用白话，不要堆抽象设计术语。
 
-For configuration-heavy pages, additionally check:
+对配置密集页，额外检查：
 
-- should the page use grouped sections, tabs, steps, or split workspace layout
-- where draft save, validation, publish, and rollback actions belong
-- whether change logs and version history are first-class pages rather than afterthoughts
+- 应该用分组区块、Tabs、Steps 还是左右分栏工作台
+- 草稿保存、校验、发布、回滚放在哪里最合适
+- 变更记录和版本历史是否应该成为一级页面
 
-For review-queue pages, additionally check:
+对审核队列页，额外检查：
 
-- whether assignee, SLA, timeout, and priority should appear in the queue
-- whether review actions belong in a side panel, sticky footer, or dedicated action block
-- whether material preview should be inline, in a drawer, or on a dedicated route
+- 列表里是否要展示指派人、SLA、超时和优先级
+- 审核动作适合放在侧栏、吸底区还是独立操作区
+- 材料预览适合内嵌、抽屉还是独立路由
 
-Avoid:
+默认避免：
 
-- decorative layout noise
-- oversized hero sections
-- animation-heavy interactions
-- consumer-app visual tropes
+- 装饰性布局噪音
+- 过大的 hero 区
+- 动效过重的交互
+- 偏消费级应用的视觉语汇
 
-## Trial output review
+## 内容站例外
 
-After a prototype or sample page is generated, evaluate:
+如果用户明确要做官网或内容页：
 
-- Did it stay within enterprise admin conventions?
-- Did it produce a route tree and page map before code?
-- Did it use reusable page archetypes instead of one-off compositions?
-- Did it keep front/back-end separation explicit?
-- Did it leave a scaffold path that can be repeated on the next project?
+- 可以允许更强的视觉方向
+- 可以使用更丰富的排版和背景层次
+- 只有 SEO 真正重要时才显式考虑 SSR / SSG
 
-If the answer is no, refine the skill instructions before refining the sample again.
+但这不应覆盖整个 skill 的中后台默认基线。
 
-## Marketing page exception
+## Prompt 模板
 
-If the user explicitly asks for a marketing or content page:
+# Prompt 模板
 
-- allow stronger visual direction
-- allow richer typography and backgrounds
-- consider SSR/SSG only if SEO is a real goal
+## 模板 1：简短业务描述
 
-Do not let this override the default admin baseline for the whole skill.
-
-## Prompts
-
-# Prompt Templates
-
-## Template 1: Short business prompt
-
-Use this when you want the skill to infer most of the structure.
+当你希望 skill 自行推断大部分结构时，直接这样说：
 
 ```text
 做一个 [系统名称] 的中后台。
@@ -256,9 +207,9 @@ Use this when you want the skill to infer most of the structure.
 先给我原型方案，不要急着接后端。
 ```
 
-## Template 2: Prototype-first prompt
+## 模板 2：原型优先
 
-Use this when you want a more controlled prototype output.
+当你希望原型输出更可控时，使用：
 
 ```text
 请用 React-first 的企业中后台方案，给我设计一个 [系统名称]。
@@ -274,9 +225,9 @@ Use this when you want a more controlled prototype output.
 4. 不写后端
 ```
 
-## Template 2A: Prototype with style guidance
+## 模板 3：带风格要求的原型
 
-Use this when you want the skill to translate visual intent before prototyping.
+当你希望先把视觉方向说清楚时，使用：
 
 ```text
 请用 React-first 的企业中后台方案，给我设计一个 [系统名称]。
@@ -297,9 +248,9 @@ Use this when you want the skill to translate visual intent before prototyping.
 5. 不写后端
 ```
 
-## Template 2C: Blue-toned admin prompt
+## 模板 4：蓝灰忧郁风中后台
 
-Use this when you want a calm blue-gray enterprise backend style.
+当你想要“蓝色忧郁、偏蓝灰、不土”的企业中后台时，使用：
 
 ```text
 请用 React-first 的企业中后台方案，给我设计一个 [系统名称]。
@@ -318,9 +269,9 @@ Use this when you want a calm blue-gray enterprise backend style.
 4. 再给组件清单
 ```
 
-## Template 2B: Image-driven style prompt
+## 模板 5：参考图驱动的风格抽取
 
-Use this when you have screenshots or reference images.
+当你手里有截图或参考图时，使用：
 
 ```text
 我会给你 1 到 3 张参考图。
@@ -337,9 +288,9 @@ Use this when you have screenshots or reference images.
 - 明确告诉我哪些元素应该借鉴，哪些不要照搬
 ```
 
-## Template 3: Scaffold prompt
+## 模板 6：脚手架生成
 
-Use this when you want project structure and starter code.
+当你要生成项目结构和 starter 代码时，使用：
 
 ```text
 基于 React + TypeScript + Vite + TanStack Query + React Hook Form + Zod + Tailwind，
@@ -355,9 +306,9 @@ Use this when you want project structure and starter code.
 - 测试基线
 ```
 
-## Template 4: From prototype to code
+## 模板 7：从原型进入代码
 
-Use this after the prototype is accepted.
+当原型确认后，使用：
 
 ```text
 按刚才确认的原型，开始生成前端页面代码。
@@ -369,9 +320,9 @@ Use this after the prototype is accepted.
 - 组件尽量可复用
 ```
 
-## Template 5: Skill validation prompt
+## 模板 8：用业务样本验证 skill 本身
 
-Use this when the goal is to test and improve the skill itself, not just produce one page.
+当你的目标是验证和改进 skill，而不是只产出一次页面时，使用：
 
 ```text
 把下面这个需求当成一次 skill 验证样本，而不是单次项目交付。
@@ -387,142 +338,139 @@ Use this when the goal is to test and improve the skill itself, not just produce
 [在这里放业务描述]
 ```
 
-## Expected output order
+## 默认输出顺序
 
-For vague prompts, the skill should respond in this order:
+对于较模糊的请求，skill 默认按下面顺序响应：
 
-1. visual decision card if style is mentioned
-2. product goal
-3. route tree
-4. module breakdown
-5. page prototype notes
-6. component inventory
-7. implementation suggestion
+1. 风格相关时先给视觉决策卡
+2. 产品目标
+3. 路由树
+4. 模块拆解
+5. 页面原型说明
+6. 组件清单
+7. 实现建议
 
-Do not start with large amounts of code unless the user explicitly asks for code first.
+除非用户明确要求先出代码，否则不要一上来就输出大量实现代码。
 
-## Patterns
+## 模式
 
-# Admin Patterns
+# 中后台模式
 
-## Purpose
+## 目的
 
-Use these patterns to avoid reinventing enterprise admin pages for every request.
+这些模式用于避免每次都从零发明企业中后台页面结构。
 
-## Core page archetypes
+## 核心页面类型
 
-### 1. List page
+### 1. 列表页
 
-Use when the task is management, querying, operation, reconciliation, or reporting entry.
+适用于：管理、查询、操作入口、对账、统计入口。
 
-Default structure:
+默认结构：
 
-- page title
-- filter/search area
-- summary strip when useful
-- data table
-- row actions
-- batch actions
-- pagination
+- 页面标题
+- 筛选/搜索区
+- 摘要条（需要时）
+- 数据表格
+- 行内操作
+- 批量操作
+- 分页
 
-### 2. Detail page
+### 2. 详情页
 
-Use when the task is record inspection, drill-down, or traceability.
+适用于：记录查看、下钻分析、可追溯场景。
 
-Default structure:
+默认结构：
 
-- primary summary card
-- status and key identifiers
-- tabs or grouped sections
-- timeline or operation log
-- related records
+- 主摘要卡
+- 状态与关键标识
+- Tabs 或分组区块
+- 时间线或操作日志
+- 关联记录
 
-### 3. Form page
+### 3. 表单页
 
-Use when the task is create/edit/configure/submit.
+适用于：新增、编辑、配置、提交。
 
-Default structure:
+默认结构：
 
-- concise guidance area
-- grouped fields
-- inline validation
-- sticky action bar
-- change history when needed
+- 简洁引导区
+- 分组字段
+- 行内校验
+- 吸底操作栏
+- 变更历史（需要时）
 
-When the page is configuration-dense, explicitly decide one of these layouts:
+当页面配置项很多时，要明确判断更适合哪种布局：
 
-- grouped form sections
-- tabbed configuration
-- step form
-- split workspace with left source panel and right configuration panel
+- 分组表单区块
+- Tabs 配置
+- 分步表单
+- 左侧来源、右侧配置的工作台布局
 
-If versioning or publishing is involved, also surface:
+如果存在版本、发布、回滚，也要显式暴露：
 
-- draft state
-- validation state
-- publish action
-- rollback or compare entry
+- 草稿状态
+- 校验状态
+- 发布动作
+- 回滚或比对入口
 
-### 4. Dashboard page
+### 4. 仪表盘页
 
-Use when the task is monitoring, governance, or executive overview.
+适用于：监控、治理、概览、经营看板。
 
-Default structure:
+默认结构：
 
-- filter area
-- KPI cards
-- one or two main trend charts
-- ranking or distribution panels
-- action-oriented alerts
+- 筛选区
+- KPI 卡片
+- 一到两个主趋势图
+- 排名或分布面板
+- 可执行告警
 
-Do not turn dashboards into decorative cockpits unless the user explicitly wants that style.
+除非用户明确要求，不要把仪表盘做成装饰性驾驶舱。
 
-### 5. Review queue page
+### 5. 审核队列页
 
-Use when the task is approval, review, audit, or exception handling.
+适用于：审批、复核、审核、异常处理。
 
-Default structure:
+默认结构：
 
-- queue filters
-- result table
-- detail drawer or side panel
-- audit information
-- explicit next actions
+- 队列筛选区
+- 结果表格
+- 详情抽屉或侧边详情面板
+- 审计信息
+- 明确的下一步动作
 
-Also consider:
+额外关注：
 
-- assignee
-- SLA or timeout marker
-- priority marker
-- reason selector for reject/return actions
-- material preview strategy
+- 指派人
+- SLA 或超时标识
+- 优先级
+- 驳回/退回原因选择器
+- 材料预览策略
 
-## Layout defaults
+## 布局默认值
 
-For enterprise admin systems, prefer:
+对企业中后台，优先采用：
 
-- left navigation or top navigation with clear hierarchy
-- shallow visual hierarchy
-- white or light neutral surfaces
-- dense but readable tables
-- restrained color usage focused on state and alerts
+- 左侧导航或顶部导航，层级清楚
+- 克制但清晰的视觉层级
+- 白色或浅中性色表面
+- 信息密度适中偏高但仍可读的表格
+- 颜色主要用于状态和提醒，而不是装饰
 
-## Component defaults
+## 组件默认映射
 
-Map archetypes to reusable components:
+把页面类型映射到可复用组件：
 
-- list page -> `FilterBar`, `SummaryStrip`, `DataTable`
-- detail page -> `ProfileCard`, `InfoGrid`, `Timeline`
-- form page -> `SectionForm`, `FieldRow`, `ActionBar`
-- dashboard page -> `MetricCard`, `TrendPanel`, `RankingPanel`, `AlertList`
-- review queue -> `QueueTable`, `DetailDrawer`, `AuditPanel`
+- 列表页 -> `FilterBar`、`SummaryStrip`、`DataTable`
+- 详情页 -> `ProfileCard`、`InfoGrid`、`Timeline`
+- 表单页 -> `SectionForm`、`FieldRow`、`ActionBar`
+- 仪表盘页 -> `MetricCard`、`TrendPanel`、`RankingPanel`、`AlertList`
+- 审核队列 -> `QueueTable`、`DetailDrawer`、`AuditPanel`
 
-## Decision rule
+## 脚手架标准
 
-When a request contains multiple page types, identify the primary archetype for each route before designing visuals or code.
-# Scaffold Standards
-
-## Default workspace layout
+默认工作区结构：
 
 ```text
 frontend-app/
@@ -537,7 +485,7 @@ frontend-app/
     api-contract/
 ```
 
-If the request is small, a single-app layout is acceptable:
+如果需求较小，也可采用单应用结构：
 
 ```text
 src/
@@ -552,484 +500,385 @@ src/
   mocks/
 ```
 
-## Recommended page/module split
+## 模块拆分建议
 
-- `app`: providers, router, bootstrapping
-- `pages`: route-level pages
-- `features`: business modules
-- `components`: shared UI pieces
-- `services`: API access and adapters
-- `mocks`: fixture data and mock handlers
+- `app`：providers、router、bootstrapping
+- `pages`：路由级页面
+- `features`：业务模块
+- `components`：共享 UI 组件
+- `services`：API 访问和 adapter
+- `mocks`：fixture 数据和 mock handlers
 
-## Styling rules
+## 样式规则
 
-- use tokens for color, spacing, radius, and typography
-- keep utility classes readable and composable
-- extract repeated UI patterns into components early
-- avoid random one-off CSS blocks for each page
+- 用 tokens 管理颜色、间距、圆角、字体
+- utility class 要可读、可组合
+- 重复出现的 UI 形态尽早抽成组件
+- 避免每个页面都写一堆一次性 CSS
 
-## Component layers
+## 组件层级
 
-1. `primitive`
-2. `shared component`
-3. `business component`
-4. `page composition`
+1. primitive
+2. shared component
+3. business component
+4. page composition
 
-Example:
+示例：
 
-- primitive: button, dialog, input
-- shared component: data-table, search-form, stat-card
-- business component: order-status-timeline, approval-panel
-- page composition: order list page
+- primitive：button、dialog、input
+- shared component：data-table、search-form、stat-card
+- business component：approval-panel、risk-tag-list、merchant-profile
+- page composition：商户列表页、审核工作台
 
-Naming rule:
+命名规则：
 
-- prefer reusable names at the `shared component` layer, such as `DataTable`, `FilterBar`, `SummaryStrip`
-- allow domain-specific names only at the `business component` or `page composition` layer
-- avoid treating domain-specific tables or panels as globally reusable components
+- 在 `shared component` 层尽量使用可复用名称，例如 `DataTable`、`FilterBar`、`SummaryStrip`
+- 只有 `business component` 或 `page composition` 层才允许明显的领域语义
+- 不要把领域专用面板误标成全局共享组件
 
-## State rules
+## 状态管理规则
 
-- remote data: `TanStack Query`
-- form state: `React Hook Form`
-- validation: `Zod`
-- local UI state: `useState` first
+- 远程数据：`TanStack Query`
+- 表单状态：`React Hook Form`
+- 校验：`Zod`
+- 本地 UI 状态：优先 `useState`
 
-Only add a global store when there is real cross-page client state that does not belong to the server cache.
+只有出现真正跨页面、且不属于服务端缓存的客户端状态时，再考虑全局 store。
 
-## Quality gates
+## 质量门槛
 
-Minimum:
+最低要求：
 
-- type check passes
-- build passes
-- unit/component tests for shared critical parts
-- one Playwright smoke test for major flows
+- type check 通过
+- build 通过
+- 共享关键组件具备单元/组件测试
+- 关键流程至少一条 Playwright smoke test
 
-Preferred:
+加分项：
 
-- Storybook stories for reusable business components
-- visual review of core pages before API integration
+- 为高复用业务组件补 Storybook
+- 在 API 对接前先做核心页面视觉复核
 
-## Naming rules
+## 风格
 
-- use business language, not vague UI names
-- routes and feature folders should map to modules the business can recognize
-- avoid folders like `misc`, `common2`, `temp-ui`
+# 视觉输入
 
-## Deliverable checklist
+## 目的
 
-When generating a scaffold or page code, make sure the output includes:
+这个文件用于帮助“不懂设计术语、但知道自己想要什么感觉”的用户，把模糊视觉诉求翻译成明确的前端约束。
 
-- route structure
-- layout structure
-- reusable component candidates
-- request layer placeholders
-- mock strategy
-- test entry points
-- clear follow-up docking points for backend APIs
+## 用户常见输入方式
 
-## Style
+用户可能通过这些方式描述风格：
 
-# Visual Intake
+- 直接说形容词
+- 给参考产品
+- 贴截图或 UI 图片
+- 用否定句表达不要什么，例如 `不要花哨`
 
-## Purpose
+## 翻译规则
 
-Use this file when the user is not a designer and describes style in plain language.
+不要要求用户先学设计黑话。应该把日常表达翻译成具体决策。
 
-The job is to translate fuzzy visual intent into concrete frontend constraints before prototyping.
-
-## Input types
-
-The user may describe style through:
-
-- plain adjectives
-- example products
-- screenshots or UI images
-- rejection statements such as `不要花哨`
-
-## Translation rule
-
-Do not ask the user for design jargon.
-
-Translate everyday language into concrete decisions.
-
-Examples:
+例如：
 
 - `稳重`
-  - low saturation
-  - light neutral backgrounds
-  - restrained accent color usage
-  - regular spacing rhythm
+  - 低饱和配色
+  - 浅中性色背景
+  - 点缀色使用克制
+  - 间距节奏规则
 - `专业`
-  - clear hierarchy
-  - readable table/form structure
-  - limited decorative elements
+  - 层级清晰
+  - 表格和表单结构可读
+  - 装饰元素少
 - `高级一点`
-  - fewer colors
-  - more consistent spacing
-  - lighter shadows
-  - tighter typography hierarchy
+  - 颜色更少
+  - 间距更统一
+  - 阴影更轻
+  - 字体层级更克制
 - `像后台`
-  - strong filter zone
-  - table-first layouts
-  - clear navigation
-  - compact interaction patterns
+  - 筛选区明确
+  - 以表格和表单为主
+  - 导航清楚
+  - 交互更紧凑
 - `不要大屏感`
-  - avoid dark cockpit look
-  - avoid oversized charts
-  - avoid glowing gradients
-  - avoid visual over-decoration
+  - 避免深色驾驶舱
+  - 避免夸张巨图表
+  - 避免发光渐变
+  - 避免装饰性过强
 - `不要太丑`
-  - reduce randomness
-  - unify radius and spacing
-  - avoid mixed visual languages
+  - 降低随机感
+  - 统一圆角和间距
+  - 避免混杂视觉语言
 - `蓝色忧郁`
-  - low-saturation blue-gray palette
-  - calm and slightly cool emotional tone
-  - medium density instead of empty luxury layout
-  - restrained highlights, not neon blue
+  - 低饱和蓝灰主色
+  - 冷静、略克制的情绪
+  - 适中的信息密度，而不是空旷豪华感
+  - 高亮克制，不要霓虹蓝
 - `不要太土`
-  - avoid cheap-looking gradients
-  - avoid too many unrelated colors
-  - reduce decorative chart treatments
-  - keep typography and spacing consistent
+  - 避免廉价渐变
+  - 避免杂乱多色
+  - 降低花式图表修饰
+  - 统一排版和间距
 
-## Reference products
+## 参考产品处理规则
 
-When the user mentions a known product, do not imitate branding. Extract only reusable traits.
+用户提到知名产品时，不要模仿品牌，只提炼可复用特征。
 
-Examples:
+例如：
 
 - `飞书后台`
-  - calm enterprise productivity feel
-  - clean spacing
-  - moderate density
-  - practical cards and tables
+  - 冷静的企业协作感
+  - 清爽间距
+  - 中等信息密度
+  - 实用的卡片与表格
 - `阿里云控制台`
-  - strong platform feel
-  - dense navigation and management structure
-  - clear state display
-  - strong operational orientation
+  - 强平台感
+  - 更密的导航和管理结构
+  - 状态展示清楚
+  - 操作导向更强
 
-## Output format
+## 输出格式
 
-Prefer this shape:
+风格相关时，优先产出这张卡片：
 
 ```md
-Visual Decision Card
-- Style keywords:
-- Reference feel:
-- Palette direction:
-- Typography tone:
-- Density:
-- Navigation:
-- Table style:
-- Form style:
-- Chart style:
-- Do not do:
+视觉决策卡
+- 风格关键词：
+- 参考气质：
+- 配色方向：
+- 字体语气：
+- 信息密度：
+- 导航方式：
+- 表格风格：
+- 表单风格：
+- 图表风格：
+- 明确不要：
 ```
 
-## Rule for non-design users
+## 非设计背景用户规则
 
-If the user only says `你帮我定`, do not stop. Choose a safe enterprise-admin preset from `style-presets.md`, state the choice clearly, and continue.
-# Style Presets
+如果用户只说 `你帮我定`，不要停下来。直接从下面的预设里选一个最稳的企业中后台方案，并明确告知你的选择。
 
-Use these presets when the user gives broad style goals but does not specify detailed visual rules.
+# 风格预设
 
-## Preset A: Calm Enterprise
+## 预设 A：稳重企业型
 
-Use when the user says:
+适用表达：
 
 - 稳重
 - 专业
 - 企业中后台
 - 不要花哨
 
-Traits:
+特征：
 
-- light neutral background
-- blue or slate accent
-- medium information density
-- restrained cards
-- clear filter areas
-- readable tables
-- weak shadow, moderate radius
+- 浅中性色背景
+- 蓝色或石板灰点缀
+- 中等信息密度
+- 卡片克制
+- 筛选区明确
+- 表格可读性优先
+- 弱阴影、中等圆角
 
-Avoid:
+避免：
 
-- giant hero areas
-- dark cockpit visuals
-- colorful gradients
+- 巨型 hero
+- 深色驾驶舱
+- 多彩渐变
 
-## Preset B: Platform Console
+## 预设 B：平台控制台型
 
-Use when the user says:
+适用表达：
 
 - 平台型
 - 控制台
 - 像云平台
 - 运维后台
 
-Traits:
+特征：
 
-- stronger navigation hierarchy
-- denser layout
-- state-first visual emphasis
-- compact cards
-- heavier table usage
-- stronger secondary panels
+- 更强的导航层级
+- 更紧凑的布局
+- 状态优先
+- 卡片更紧
+- 表格占比更高
+- 辅助面板更明确
 
-Avoid:
+避免：
 
-- marketing-style storytelling blocks
-- oversized whitespace
+- 官网式叙事块
+- 过大的留白
 
-## Preset C: Light Operations
+## 预设 C：轻量运营型
 
-Use when the user says:
+适用表达：
 
 - 轻量
 - 简洁
 - 日常运营
 - 不要太重
 
-Traits:
+特征：
 
-- more breathing room
-- fewer border layers
-- smaller number of KPI cards
-- simpler chart treatment
+- 更多呼吸感
+- 边框层级更少
+- KPI 卡数量更少
+- 图表处理更克制
 
-Avoid:
+避免：
 
-- heavy control-panel density
-- too many stacked cards
+- 过重的控制台密度
+- 过多堆叠卡片
 
-## Preset D: Review Workspace
+## 预设 D：审核工作台型
 
-Use when the user says:
+适用表达：
 
 - 审核
 - 审批
 - 可追溯
 - 风控
 
-Traits:
+特征：
 
-- queue plus detail split
-- explicit action panels
-- timeline and audit emphasis
-- status and risk indicators
-- calm but serious color language
+- 队列 + 详情分栏
+- 明确的动作区
+- 强调时间线与审计信息
+- 状态和风险标识清楚
+- 整体冷静但严肃
 
-Avoid:
+避免：
 
-- hiding actions inside generic dropdowns
-- decorative dashboards replacing work surfaces
+- 把关键操作藏进普通下拉菜单
+- 用装饰性仪表盘代替工作面
 
-## Preset E: Configuration Workspace
+## 预设 E：配置工作台型
 
-Use when the user says:
+适用表达：
 
 - 配置
 - 映射
 - 模板
 - 版本
 
-Traits:
+特征：
 
-- grouped form sections or split workspace
-- sticky action bar
-- validation state visibility
-- version and audit visibility
-- form density handled through grouping
+- 分组表单或左右工作台
+- 吸底操作栏
+- 校验状态清晰可见
+- 版本与审计信息显式展示
+- 通过分组控制表单密度
 
-Avoid:
+避免：
 
-- giant ungrouped forms
-- burying validation and publish actions
+- 巨型无分组表单
+- 把校验和发布动作埋得太深
 
-## Preset F: Blue Dusk Admin
+## 预设 F：蓝灰忧郁型后台
 
-Use when the user says:
+适用表达：
 
 - 蓝色忧郁
-- 冷一点
-- 不要太土
 - 偏蓝灰
-- 想要克制一点
+- 不要太土
+- 信息密度适中
 
-Traits:
+特征：
 
-- low-saturation blue-gray palette
-- medium information density
-- calm enterprise-admin temperament
-- soft glassy or misty surfaces used sparingly
-- charts and cards kept restrained
-- ledger or governance-console feel
+- 低饱和蓝灰主色
+- 中浅背景 + 冷静表面层
+- 中等偏上的信息密度
+- 表格和图表都克制，不追求秀肌肉
+- 状态色依然清晰，但主色不艳
 
-Avoid:
+避免：
 
-- neon blue
-- loud gradients
-- dashboard cockpit visuals
-- overly playful rounded consumer-app styling
-# Image To Style Rules
+- 霓虹蓝
+- 科技大屏感
+- 花哨渐变块
+- 炫技仪表盘布局
 
-Use this file when the user provides screenshots or reference images.
+## 校验
 
-## Goal
+# 校验清单
 
-Do not copy the reference literally.
+这个文件用于在真实需求上跑完 skill 之后，回看它是否真的稳定可复用。
 
-Extract reusable style signals and turn them into implementable frontend rules.
+## 输出质量
 
-## What to inspect
+- 是否正确识别了场景属于 `中后台`、`官网内容页` 还是 `混合型`？
+- 用户提到风格时，是否先产出了视觉决策卡？
+- 是否在大量代码之前先给出了路由树？
+- 是否识别出了可复用的页面模式？
+- 视觉方向是否符合企业中后台常规，而不是跑偏成 demo 风？
+- 是否避免了“一次性样板间”式页面风格？
 
-For each image, inspect:
+## 可复用性
 
-- background brightness
-- navigation layout
-- spacing density
-- card borders vs shadows
-- table density
-- form density
-- primary accent color
-- radius strength
-- chart temperament
+- 脚手架或页面结构能否稍作修改就复用到另一个中后台项目？
+- 组件边界是否可复用，而不是满屏领域专属 one-off 组件？
+- 请求层、mock 层、类型层是否清晰分离？
+- 后续接真实后端时，是否不需要推翻页面组合结构？
 
-## What to output
+## Skill 健康度
 
-After inspecting the images, summarize:
+- 这次结果是否暴露了 skill 指令缺失？
+- 这次结果是否暴露了某条规则过度具体，需要抽象？
+- 结果是否依赖了未写明的假设？
+- 是否出现了重复的人工修正点？
+- skill 是否能把用户的白话视觉诉求，翻译成可实现的设计规则？
 
-- what to borrow
-- what not to borrow
-- what to convert for enterprise admin use
+## 评分标尺
 
-## Example transformation
+每个维度打分：
 
-If the reference image has:
+- `2`：稳定
+- `1`：部分到位
+- `0`：明显不足
 
-- large gradient hero
-- oversized cards
-- low information density
+总分解释：
 
-and the target is admin backend:
+- `10-12`：可作为可用基线
+- `7-9`：方向正确，但还需打磨
+- `0-6`：skill 说明需要先重构，再继续扩展
 
-- borrow the color restraint if useful
-- do not borrow the hero layout
-- compress spacing
-- convert cards into tables or practical panels
+## 核心评分维度
 
-## Safety rule
+### 1. 结构优先
 
-If an image is visually attractive but structurally bad for enterprise admin work, say so clearly and only borrow the useful parts.
+是否先输出了：
 
-## Output shape
+- 产品目标
+- 路由树
+- 页面地图
 
-```md
-Image Style Summary
-- Borrow:
-- Do not borrow:
-- Convert for admin use:
+而不是一上来就写代码。
 
-Visual Decision Card
-- Style keywords:
-- Palette direction:
-- Density:
-- Navigation:
-- Table/Form treatment:
-- Do not do:
-```
+### 2. 页面模式映射
 
-## Validation
+是否把页面正确映射到这些中后台模式：
 
-# Validation Checklist
+- 列表
+- 详情
+- 表单
+- 仪表盘
+- 审核队列
 
-Use this after running the skill on a real prompt.
+### 3. 企业中后台贴合度
 
-## Output quality
+是否保持了这些基本盘：
 
-- Did the output classify the scene correctly as `admin`, `marketing`, or `mixed`?
-- When style was mentioned, did it first produce a visual decision card?
-- Did it produce a route tree before large code output?
-- Did it identify reusable page archetypes?
-- Did it keep the visual direction aligned with enterprise admin norms?
-- Did it avoid drifting into one-off demo styling?
+- 信息层级清晰
+- 筛选/搜索区明确
+- 视觉克制
+- 没有跑偏成驾驶舱或 demo 展示页
 
-## Reusability
+如果用户提到了风格，还要检查视觉决策卡是否把白话诉求转成了具体选择。
 
-- Can the scaffold or page structure be reused on another admin project with minimal changes?
-- Are component boundaries reusable rather than domain-named one-offs?
-- Are request, mock, and type layers clearly separated?
-- Can backend APIs be connected later without rewriting page composition?
+### 4. 可复用组件能力
 
-## Skill health
-
-- Did the result reveal a missing instruction in the skill?
-- Did the result reveal an over-specific instruction that should be generalized?
-- Did the result depend on unstated assumptions that should be added to the prompt templates?
-- Did the result require repeated manual correction in the same area?
-- Did the skill translate plain-language visual intent into implementable visual rules without needing design jargon from the user?
-
-## Action after review
-
-If the trial mainly exposed a local page issue, fix the sample.
-
-If the trial exposed a recurring workflow issue, update the skill.
-# Validation Rubric
-
-Use this rubric after each validation scenario.
-
-## Scoring method
-
-For each dimension, score:
-
-- `2`: solid
-- `1`: partial
-- `0`: weak or missing
-
-Total score:
-
-- `10-12`: usable baseline
-- `7-9`: promising but needs refinement
-- `0-6`: skill instructions need rework before further expansion
-
-## Dimension 1: Structure first
-
-Check whether the output produced:
-
-- product goal
-- route tree
-- page map
-
-before jumping into code or visual detail.
-
-## Dimension 2: Archetype mapping
-
-Check whether the output correctly mapped routes to reusable admin page archetypes such as:
-
-- list
-- detail
-- form
-- dashboard
-- review queue
-
-## Dimension 3: Enterprise admin fit
-
-Check whether the output stayed aligned with enterprise admin norms:
-
-- clear information hierarchy
-- obvious filter/search zones
-- restrained visual style
-- no decorative cockpit drift
-
-If style was requested, also check whether the visual decision card translated plain-language intent into concrete choices.
-
-## Dimension 4: Reusable components
-
-Check whether the component list is reusable across projects, for example:
+组件清单里是否有跨项目可复用的组件，例如：
 
 - `FilterBar`
 - `DataTable`
@@ -1037,46 +886,33 @@ Check whether the component list is reusable across projects, for example:
 - `ActionBar`
 - `AuditTimeline`
 
-Weak score signs:
+低分信号：
 
-- too many domain-specific component names
-- page-level one-offs disguised as reusable components
+- 领域专属组件名过多
+- 页面级 one-off 被伪装成共享组件
 
-## Dimension 5: Front/back-end separation
+### 5. 前后端分离
 
-Check whether the output preserved:
+是否保持了：
 
-- service layer boundary
-- mock/data adapter boundary
-- clear future API docking points
+- service 层边界
+- mock / 数据 adapter 边界
+- 明确的未来 API 对接点
 
-## Dimension 6: Scaffoldability
+### 6. 脚手架连续性
 
-Check whether the result can naturally continue into:
+结果是否能自然继续推进到：
 
-- project scaffold
-- route files
-- shared layout
-- base business components
+- 项目脚手架
+- 路由文件
+- 共享 layout
+- 基础业务组件
 
-If the output is interesting but hard to continue into code, score this low.
+如果结果看着不错，但很难继续落代码，这一项应低分。
 
-## After scoring
+## 标准校验场景
 
-If one dimension repeatedly scores `0` or `1` across scenarios, update the skill references or prompt templates before testing more samples.
-# Validation Scenarios
-
-Use these as standard repeatable prompts to test the skill itself.
-
-The goal is not to produce the final business system. The goal is to see whether the skill can reliably convert short business requests into stable enterprise frontend outputs.
-
-## Scenario 1: List management
-
-### Purpose
-
-Tests whether the skill can reliably generate a classic management backend centered on list, filter, detail, and batch operations.
-
-### Prompt
+### 场景 1：列表管理后台
 
 ```text
 把下面这个需求当成一次 skill 验证样本，而不是单次项目交付。
@@ -1096,21 +932,14 @@ Tests whether the skill can reliably generate a classic management backend cente
 先出原型，不接后端。
 ```
 
-### What this should expose
+主要观察：
 
-- list page archetype quality
-- filter zone completeness
-- detail page structure
-- batch action awareness
-- operation log and traceability awareness
+- 列表页模式是否稳
+- 筛选区是否完整
+- 详情页是否有可追溯结构
+- 是否考虑批量操作与日志
 
-## Scenario 2: Configuration form
-
-### Purpose
-
-Tests whether the skill can generate a configuration-heavy admin system instead of only table pages.
-
-### Prompt
+### 场景 2：配置型后台
 
 ```text
 把下面这个需求当成一次 skill 验证样本，而不是单次项目交付。
@@ -1130,21 +959,14 @@ Tests whether the skill can generate a configuration-heavy admin system instead 
 先出原型，不写后端。
 ```
 
-### What this should expose
+主要观察：
 
-- form page archetype quality
-- grouped field design
-- configuration information density control
-- versioning and audit awareness
-- action bar and validation thinking
+- 表单页模式是否合理
+- 分组和信息密度是否可控
+- 是否考虑版本与审计
+- 是否具备校验与吸底操作栏意识
 
-## Scenario 3: Review queue
-
-### Purpose
-
-Tests whether the skill can produce approval and review workflows instead of plain CRUD pages.
-
-### Prompt
+### 场景 3：审核工作台
 
 ```text
 把下面这个需求当成一次 skill 验证样本，而不是单次项目交付。
@@ -1164,53 +986,45 @@ Tests whether the skill can produce approval and review workflows instead of pla
 先出原型，不接后端。
 ```
 
-### What this should expose
+主要观察：
 
-- review queue archetype quality
-- drawer or side panel decisions
-- audit trail awareness
-- action priority clarity
-- detail and queue split quality
+- 审核队列是否突出效率
+- 详情区和动作区是否清晰
+- 是否正确处理材料预览与审计历史
+- 是否具备风险与状态表达能力
 
-## Recommended test order
+## 复盘动作
 
-1. `Scenario 1`
-2. `Scenario 2`
-3. `Scenario 3`
+- 如果问题只是某个样例页写得不好，优先修样例。
+- 如果问题是重复出现的流程缺陷，优先回改 skill 本身。
 
-Reason:
+## 安装说明
 
-- first validate the most common list management case
-- then validate form-heavy configuration complexity
-- finally validate workflow-heavy approval complexity
-
-## Install Notes
-
-# Install Notes
+# 安装说明
 
 ## Codex
 
-- Generated adapter path: `adapters/codex/`
-- Install target: `~/.codex/skills/frontend-react-rapid-delivery`
-- Preferred install mode: symlink
+- 生成后的 adapter 路径：`adapters/codex/`
+- 安装目标：`~/.codex/skills/frontend-react-rapid-delivery`
+- 推荐方式：软链
 
 ## Claude Code
 
-- Generated adapter path: `adapters/claude/CLAUDE.md`
-- Install target: target project root `CLAUDE.md`
-- Preferred install mode: symlink
-- For team use, keep the repository outside project code and link the adapter into the project
+- 生成后的 adapter 路径：`adapters/claude/CLAUDE.md`
+- 安装目标：目标项目根目录下的 `CLAUDE.md`
+- 推荐方式：软链
+- 团队使用时，建议把 skill 仓库放在项目外部，再把 adapter 链接进项目
 
 ## Cursor
 
-- Generated adapter path: `adapters/cursor/`
-- Install targets:
+- 生成后的 adapter 路径：`adapters/cursor/`
+- 安装目标：
   - `.cursor/rules/frontend-react-rapid-delivery.mdc`
-  - fallback `AGENTS.md`
-- Preferred install mode: symlink
+  - 兜底 `AGENTS.md`
+- 推荐方式：软链
 
-## Repository policy
+## 仓库约定
 
-- Edit `core/` and `skill.yaml`
-- Regenerate `adapters/` with `./scripts/build`
-- Do not treat generated adapters as the primary source of truth
+- 修改内容时优先编辑 `core/` 和 `skill.yaml`
+- 改完后用 `./scripts/build` 重新生成 `adapters/`
+- 不要把生成后的 adapter 当作主源长期手改

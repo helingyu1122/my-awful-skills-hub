@@ -1,23 +1,23 @@
 ---
 name: frontend-react-rapid-delivery
-description: React-first enterprise frontend design, prototype, and page delivery workflow.
+description: 面向企业中后台的 React 前端设计、原型与页面交付工作流。
 ---
 
-# Frontend React Rapid Delivery
+# React 企业前端快速交付
 
-Use this skill when the user wants a reusable enterprise frontend workflow centered on React and front/back-end separation.
+当用户需要一套以 React 为核心、强调前后端分离、适用于企业中后台的可复用前端工作流时，使用这个 skill。
 
-## Default Output Order
+## 默认输出顺序
 
-1. visual decision card when style matters
-2. product goal
-3. route and module tree
-4. page archetype mapping
-5. component inventory
-6. scaffold or page plan
-7. API docking assumptions
+1. 视觉决策卡（风格相关时）
+2. 产品目标
+3. 路由与模块结构
+4. 页面模式映射
+5. 组件清单
+6. 脚手架或页面实现建议
+7. API 对接假设
 
-## References
+## 参考资料
 
 - [workflow](references/workflow.md)
 - [prompts](references/prompts.md)

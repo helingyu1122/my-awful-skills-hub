@@ -1,37 +1,37 @@
-# Workflow
+# 工作流
 
-## Standard flow
+## 标准流程
 
-Use this flow when the user wants speed and reuse from short prompts.
+当用户希望根据短描述快速得到稳定、可复用的前端方案时，按下面流程执行：
 
-1. Interpret the business request.
-2. Convert it into a frontend-facing brief.
-3. Convert visual input into a visual decision card when needed.
-4. Produce a prototype summary before heavy coding.
-5. Confirm or revise the prototype.
-6. Generate scaffold or page code.
-7. Leave clear API docking points for later backend integration.
-8. Evaluate the result against the validation checklist and feed learnings back into the skill.
+1. 先理解业务目标、角色、模块和页面重点。
+2. 把业务描述转成前端可落地的 brief。
+3. 如果用户提到风格、参考产品或图片，先输出视觉决策卡。
+4. 在写大量代码前，先给原型摘要。
+5. 根据用户反馈确认或修正原型。
+6. 再生成脚手架方案、页面结构或前端代码。
+7. 明确保留后续 API 对接点，保证前后端分离。
+8. 最后用校验清单回看结果，把发现沉淀回 skill。
 
-## Frontend-facing brief
+## 前端 brief 拆解
 
-From a short business request, derive:
+从一句或几句业务描述中，至少要补全这些前端视角信息：
 
-- user roles
-- page modules
-- main entities
-- core actions
-- high-risk interactions
-- permission-sensitive areas
-- table-heavy vs form-heavy vs dashboard-heavy ratio
-- whether the workflow contains `draft`, `validate`, `publish`, `rollback`, or `audit` states
-- whether the workflow contains `assignment`, `SLA`, `timeout`, `review action`, or `material preview` states
+- 主要使用角色
+- 页面模块
+- 核心实体
+- 关键动作
+- 高风险交互
+- 权限敏感区域
+- 表格密集 / 表单密集 / 仪表盘密集的比例
+- 是否存在 `草稿`、`校验`、`发布`、`回滚`、`审计` 等状态
+- 是否存在 `指派`、`SLA`、`超时`、`审核动作`、`材料预览` 等流程节点
 
-## Visual intake
+## 视觉输入处理
 
-If the user expresses style in plain language, example products, or images, normalize it before prototyping.
+如果用户通过自然语言、参考产品或图片表达风格，不要直接追问设计术语，而是先做归一化。
 
-Translate inputs such as:
+需要把类似下面的输入：
 
 - `稳重`
 - `像飞书后台`
@@ -39,164 +39,114 @@ Translate inputs such as:
 - `高级一点`
 - `参考这张图`
 
-into a visual decision card with:
+转成一张视觉决策卡，明确：
 
-- style keywords
-- density level
-- navigation style
-- surface style
-- table and form treatment
-- chart temperament
-- forbidden visual traits
+- 风格关键词
+- 信息密度
+- 导航方式
+- 表面层级
+- 表格与表单处理方式
+- 图表气质
+- 禁止出现的视觉特征
 
-## Prototype output contract
+## 原型输出约定
 
-Before writing a lot of code, produce:
+在大规模写代码之前，先输出：
 
-- one-sentence product goal
-- visual decision card when style matters
-- page map
-- route tree
-- page archetype mapping
-- each page's purpose
-- key components
-- key interactions
-- design tone
+- 一句话产品目标
+- 视觉决策卡（风格相关时）
+- 页面地图
+- 路由树
+- 页面模式映射
+- 各页面职责
+- 关键组件
+- 关键交互
+- 设计调性说明
 
-When listing components, split them into:
+组件清单需要拆成两类：
 
-- shared reusable components
-- business assembly components
+- 可跨项目复用的共享组件
+- 带业务语义的装配组件
 
-This reduces accidental overfitting to one domain.
+## 代码生成顺序
 
-## Visual decision card contract
-
-When included, keep it compact and concrete.
-
-Recommended fields:
-
-- `style keywords`
-- `reference feel`
-- `palette direction`
-- `typography tone`
-- `density`
-- `navigation choice`
-- `table/form style`
-- `chart style`
-- `do not do`
-
-Example shape:
-
-```md
-Goal: Build an operations dashboard for merchant onboarding.
-
-Routes:
-- /dashboard
-- /merchants
-- /merchants/:id
-- /approvals
-
-Pages:
-- Dashboard: KPI cards + trend charts + pending queue
-- Merchants: filterable table + bulk actions
-- Merchant Detail: profile, risk notes, operation log
-- Approvals: review queue + detail drawer
-```
-
-## Code generation order
-
-Generate in this order unless the user requests otherwise:
+除非用户另有要求，否则按下面顺序生成：
 
 1. app shell
 2. routes
-3. shared layout
-4. token file and theme rules
-5. base business components
-6. page skeletons
-7. mock service layer
-8. tests for critical pages
+3. 通用 layout
+4. tokens 与主题规则
+5. 基础业务组件
+6. 页面骨架
+7. mock service 层
+8. 关键页面测试基线
 
-## API separation rules
+## 前后端分离规则
 
-Keep front/back-end separation explicit:
+- 请求客户端收敛在 `src/services`
+- 类型定义收敛在 `src/types` 或生成合同目录
+- 页面层不散落原始 fetch 逻辑
+- mock 数据和真实 API adapter 可以互换
 
-- isolate request clients under `src/services`
-- isolate types under `src/types` or generated contracts
-- never spread raw fetch logic across pages
-- keep mock data and live API adapters swappable
-
-Preferred request split:
+推荐拆分：
 
 - `services/http`
 - `services/modules/*`
 - `mocks/*`
 
-## Prototype-first rule
+## Prototype-first 规则
 
-When the prompt is vague, do not jump straight into polished code. First create a compact prototype plan. This reduces churn and makes later code generation more stable.
+当需求描述模糊时，不要直接输出一大段精修代码，而是先给一个紧凑、可确认的原型方案。这样能显著降低返工率。
 
-## Reuse-first rule
+## Reuse-first 规则
 
-Do not treat each request as a brand-new design exercise. First map the request to reusable archetypes such as:
+不要把每次请求都当成全新设计题。优先映射到可复用的企业中后台页面模式，例如：
 
-- list + filters + bulk actions
-- detail + tabs + timeline
-- form + steps + validation
-- dashboard + KPI + trend + ranking
-- review queue + drawer + audit log
+- 列表 + 筛选 + 批量操作
+- 详情 + 分组信息 + 时间线
+- 表单 + 分步/分组 + 校验
+- 仪表盘 + KPI + 趋势 + 分布
+- 审核队列 + 侧边详情 + 审计日志
 
-Only add custom structures when the archetypes do not cover the need.
+只有当这些模式无法覆盖需求时，再引入定制结构。
 
-## Admin system defaults
+## 中后台默认规范
 
-For admin pages, prefer:
+默认优先：
 
-- clear information density
-- obvious filter and search zones
-- stable table behavior
-- detail drawers and modals used sparingly
-- action grouping by task priority
+- 清晰的信息密度
+- 明确的筛选与搜索区
+- 稳定的表格行为
+- 克制使用抽屉和弹窗
+- 按优先级分组操作按钮
 
-For users without design background, prefer to explain visual choices in plain language instead of abstract design jargon.
+对缺乏设计背景的用户，视觉解释要尽量使用白话，不要堆抽象设计术语。
 
-For configuration-heavy pages, additionally check:
+对配置密集页，额外检查：
 
-- should the page use grouped sections, tabs, steps, or split workspace layout
-- where draft save, validation, publish, and rollback actions belong
-- whether change logs and version history are first-class pages rather than afterthoughts
+- 应该用分组区块、Tabs、Steps 还是左右分栏工作台
+- 草稿保存、校验、发布、回滚放在哪里最合适
+- 变更记录和版本历史是否应该成为一级页面
 
-For review-queue pages, additionally check:
+对审核队列页，额外检查：
 
-- whether assignee, SLA, timeout, and priority should appear in the queue
-- whether review actions belong in a side panel, sticky footer, or dedicated action block
-- whether material preview should be inline, in a drawer, or on a dedicated route
+- 列表里是否要展示指派人、SLA、超时和优先级
+- 审核动作适合放在侧栏、吸底区还是独立操作区
+- 材料预览适合内嵌、抽屉还是独立路由
 
-Avoid:
+默认避免：
 
-- decorative layout noise
-- oversized hero sections
-- animation-heavy interactions
-- consumer-app visual tropes
+- 装饰性布局噪音
+- 过大的 hero 区
+- 动效过重的交互
+- 偏消费级应用的视觉语汇
 
-## Trial output review
+## 内容站例外
 
-After a prototype or sample page is generated, evaluate:
+如果用户明确要做官网或内容页：
 
-- Did it stay within enterprise admin conventions?
-- Did it produce a route tree and page map before code?
-- Did it use reusable page archetypes instead of one-off compositions?
-- Did it keep front/back-end separation explicit?
-- Did it leave a scaffold path that can be repeated on the next project?
+- 可以允许更强的视觉方向
+- 可以使用更丰富的排版和背景层次
+- 只有 SEO 真正重要时才显式考虑 SSR / SSG
 
-If the answer is no, refine the skill instructions before refining the sample again.
-
-## Marketing page exception
-
-If the user explicitly asks for a marketing or content page:
-
-- allow stronger visual direction
-- allow richer typography and backgrounds
-- consider SSR/SSG only if SEO is a real goal
-
-Do not let this override the default admin baseline for the whole skill.
+但这不应覆盖整个 skill 的中后台默认基线。

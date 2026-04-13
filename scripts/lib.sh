@@ -17,7 +17,7 @@ require_skill() {
   local dir
   dir="$(skill_dir "$root" "$skill")"
   if [ ! -f "$dir/skill.yaml" ]; then
-    echo "Skill not found: $skill" >&2
+    echo "未找到 skill: $skill" >&2
     exit 1
   fi
 }
@@ -25,7 +25,7 @@ require_skill() {
 yaml_value() {
   local file="$1"
   local key="$2"
-  awk -F': ' -v wanted="$key" '$1 == wanted {print $2; exit}' "$file"
+  awk -F': ' -v wanted="$key" '$1 == wanted {print $2; exit}' "$file" | sed 's/^"//; s/"$//'
 }
 
 ensure_parent_dir() {
@@ -41,17 +41,17 @@ safe_symlink() {
     local current
     current="$(readlink "$target")"
     if [ "$current" = "$source" ]; then
-      echo "already-linked $target"
+      echo "已链接: $target"
       return 0
     fi
     rm "$target"
   elif [ -e "$target" ]; then
-    echo "Refusing to overwrite existing non-symlink target: $target" >&2
+    echo "拒绝覆盖已存在的非软链目标: $target" >&2
     exit 1
   fi
 
   ln -s "$source" "$target"
-  echo "linked $target -> $source"
+  echo "已创建链接: $target -> $source"
 }
 
 list_skills() {

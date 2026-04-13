@@ -11,31 +11,31 @@ codex_intro() {
   case "$skill" in
     cross-tool-skill-creator)
       cat <<'EOF_INTRO'
-Use this skill when the user wants to create a new cross-tool skill source package in the `skills-repo` format.
+当用户希望创建一个符合 `skills-repo` 规范、可跨工具复用的新 skill 源包时，使用这个 skill。
 
-## Default Output Order
+## 默认输出顺序
 
-1. skill name and summary
-2. boundary and use cases
-3. skill.yaml draft
-4. core file drafts
-5. validation scenarios
-6. adapter generation next steps
+1. skill 名称与一句话说明
+2. 适用边界与使用场景
+3. `skill.yaml` 草稿
+4. `core/*.md` 源文件草稿
+5. 校验场景
+6. adapter 生成后的下一步动作
 EOF_INTRO
       ;;
     *)
       cat <<'EOF_INTRO'
-Use this skill when the user wants a reusable enterprise frontend workflow centered on React and front/back-end separation.
+当用户需要一套以 React 为核心、强调前后端分离、适用于企业中后台的可复用前端工作流时，使用这个 skill。
 
-## Default Output Order
+## 默认输出顺序
 
-1. visual decision card when style matters
-2. product goal
-3. route and module tree
-4. page archetype mapping
-5. component inventory
-6. scaffold or page plan
-7. API docking assumptions
+1. 视觉决策卡（风格相关时）
+2. 产品目标
+3. 路由与模块结构
+4. 页面模式映射
+5. 组件清单
+6. 脚手架或页面实现建议
+7. API 对接假设
 EOF_INTRO
       ;;
   esac
@@ -46,18 +46,18 @@ cursor_workflow() {
   case "$skill" in
     cross-tool-skill-creator)
       cat <<'EOF_CURSOR_WORKFLOW'
-- Define the skill boundary before writing any adapter content.
-- Produce `skill.yaml` and `core/*.md` drafts before build output.
-- Keep platform-specific syntax out of the core files.
-- Treat adapters as generated artifacts, not source of truth.
+- 先界定 skill 的边界，再组织 adapter 内容。
+- 先产出 `skill.yaml` 和 `core/*.md`，再生成 adapter。
+- 平台特有语法不要写进 `core/` 主源。
+- 把 adapters 当成生成产物，不要当成主源手工维护。
 EOF_CURSOR_WORKFLOW
       ;;
     *)
       cat <<'EOF_CURSOR_WORKFLOW'
-- Produce a visual decision card when style matters.
-- Output product goal, route tree, page prototype, page archetypes, and reusable component inventory before large code output.
-- Preserve front/back-end separation.
-- Prefer enterprise admin norms over decorative dashboard styling.
+- 风格相关时，先输出视觉决策卡。
+- 在大量代码之前，先给出产品目标、路由树、页面原型、页面模式和可复用组件清单。
+- 明确保持前后端分离。
+- 默认遵守企业中后台的稳定规范，不要做成装饰型大屏或炫技看板。
 EOF_CURSOR_WORKFLOW
       ;;
   esac
@@ -93,7 +93,7 @@ description: $summary
 
 $(codex_intro "$skill")
 
-## References
+## 参考资料
 
 - [workflow](references/workflow.md)
 - [prompts](references/prompts.md)
@@ -106,7 +106,7 @@ EOF_SKILL
   cat <<EOF_UI > "$dir/adapters/codex/agents/openai.yaml"
 display_name: "$name"
 short_description: "$summary"
-default_prompt: "Use the generated adapter guidance and the referenced core files for this skill."
+default_prompt: "请结合这个 adapter 的说明和引用的 core 文件来使用该 skill。"
 EOF_UI
 
   cat <<EOF_CLAUDE > "$dir/adapters/claude/CLAUDE.md"
@@ -114,31 +114,31 @@ EOF_UI
 
 $summary
 
-## Intent
+## 意图
 
 $(cat "$dir/core/intent.md")
 
-## Workflow
+## 工作流
 
 $(cat "$dir/core/workflow.md")
 
-## Prompts
+## Prompt 模板
 
 $(cat "$dir/core/prompts.md")
 
-## Patterns
+## 模式
 
 $(cat "$dir/core/patterns.md")
 
-## Style
+## 风格
 
 $(cat "$dir/core/style.md")
 
-## Validation
+## 校验
 
 $(cat "$dir/core/validation.md")
 
-## Install Notes
+## 安装说明
 
 $(cat "$dir/core/install-notes.md")
 EOF_CLAUDE
@@ -151,15 +151,15 @@ alwaysApply: false
 
 # $name
 
-## Workflow
+## 工作流
 
 $(cursor_workflow "$skill")
 
-## Intent
+## 意图
 
 $(sed 's/^/  /' "$dir/core/intent.md")
 
-## Style
+## 风格
 
 $(sed 's/^/  /' "$dir/core/style.md")
 EOF_CURSOR
@@ -169,12 +169,12 @@ EOF_CURSOR
 
 $summary
 
-Use the generated Cursor rule file for detailed instructions:
+请优先查看生成后的 Cursor 规则文件：
 
 - .cursor/rules/$skill.mdc
 EOF_AGENTS
 
-  echo "built $skill"
+  echo "已构建: $skill"
 }
 
 if [ $# -eq 0 ]; then

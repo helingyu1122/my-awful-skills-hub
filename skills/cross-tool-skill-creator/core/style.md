@@ -1,23 +1,23 @@
-# Style
+# 风格
 
-Most skills do not need `style.md`.
+大多数 skill 并不需要复杂的 `style.md`。
 
-Create `style.md` only if the skill depends on:
+只有当 skill 明确依赖这些能力时，才应该把 `style.md` 写成完整模块：
 
-- visual direction
-- style translation from plain language
-- reference-image interpretation
-- output aesthetics or design constraints
+- 视觉方向定义
+- 白话风格翻译
+- 参考图或截图风格提炼
+- 审美或设计约束
 
-If the skill is not visual in nature, omit style-specific complexity and keep the file minimal.
+如果 skill 本身并非视觉类，请保持 `style.md` 极简，避免引入无意义复杂度。
 
-## If style is needed
+## 当确实需要 style.md 时
 
-Keep it reusable:
+优先保证内容可复用：
 
-- visual intake rules
-- presets
-- translation of plain-language style requests
-- image-to-style extraction rules
+- 视觉输入规则
+- 风格预设
+- 白话风格到设计约束的映射
+- 图片到风格特征的提炼规则
 
-Do not fill `style.md` with project-specific brand details unless the skill is explicitly brand-bound.
+除非 skill 本身就是品牌专属，否则不要在这里写死项目品牌细节。

@@ -1,82 +1,82 @@
-# Patterns
+# 模式
 
-## File-by-file responsibility
+## 各文件职责
 
 ### intent.md
 
-Write:
+应写：
 
-- what the skill is for
-- use cases
-- boundaries
-- default assumptions
-- typical outputs
+- skill 的用途
+- 适用场景
+- 边界
+- 默认假设
+- 典型产出
 
-Avoid:
+不要写：
 
-- long tool-specific syntax
-- adapter instructions
+- 大段平台专属语法
+- adapter 级安装细节
 
 ### workflow.md
 
-Write:
+应写：
 
-- the stable process
-- ordering rules
-- key decision points
-- output contract
+- 稳定流程
+- 顺序规则
+- 关键判断点
+- 输出约定
 
-Avoid:
+不要写：
 
-- lots of examples with no procedural value
+- 只有展示作用、没有流程价值的大量示例
 
 ### prompts.md
 
-Write:
+应写：
 
-- user input templates
-- short prompts that can be copied directly
-- intake templates for rough drafts or imports
+- 用户输入模板
+- 可以直接复制使用的简短 prompt
+- 面向 rough draft 或导入内容的 intake 模板
 
 ### patterns.md
 
-Write:
+应写：
 
-- reusable patterns
-- archetypes
-- classification rules
-- common structures or decomposition rules
+- 可复用模式
+- 分类方法
+- 常见结构
+- 拆解规则
 
 ### style.md
 
-Only use when the skill needs visual intake, visual presets, image interpretation, or design constraints.
+只有在 skill 真正依赖视觉输入、风格预设、图片理解或设计约束时才需要写复杂内容。
 
 ### validation.md
 
-Write:
+应写：
 
-- test scenarios
-- scoring criteria
-- pass/fail or rubric rules
+- 测试场景
+- 评分或通过规则
+- pass/fail 条件
 
 ### install-notes.md
 
-Write:
+应写：
 
-- adapter differences
-- install targets
-- repository policy for source vs generated files
+- 不同 adapter 的差异
+- 安装目标
+- 仓库中“源文件”和“生成文件”的边界规则
 
-## Cross-tool writing rule
+## 跨工具写作规则
 
-If a rule is only true for one platform, it does not belong in the main core files unless you clearly mark it as install or adapter guidance.
+如果某条规则只在单个平台成立，就不要直接写进 `core/` 主源，除非你明确标记它属于安装或 adapter 指南。
 
-## Example rule
+## 示例规则
 
-Good:
+好的规则：
 
-- `produce a visual decision card before page prototype when style matters`
+- `风格相关时，先输出视觉决策卡，再进入页面原型`
 
-Bad:
+不好的规则：
 
-- `put this section under CLAUDE.md exactly like this`
+- `CLAUDE.md 必须逐字写成这个样子`

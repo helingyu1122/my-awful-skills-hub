@@ -1,88 +1,81 @@
-# Validation Checklist
+# 校验清单
 
-Use this after running the skill on a real prompt.
+这个文件用于在真实需求上跑完 skill 之后，回看它是否真的稳定可复用。
 
-## Output quality
+## 输出质量
 
-- Did the output classify the scene correctly as `admin`, `marketing`, or `mixed`?
-- When style was mentioned, did it first produce a visual decision card?
-- Did it produce a route tree before large code output?
-- Did it identify reusable page archetypes?
-- Did it keep the visual direction aligned with enterprise admin norms?
-- Did it avoid drifting into one-off demo styling?
+- 是否正确识别了场景属于 `中后台`、`官网内容页` 还是 `混合型`？
+- 用户提到风格时，是否先产出了视觉决策卡？
+- 是否在大量代码之前先给出了路由树？
+- 是否识别出了可复用的页面模式？
+- 视觉方向是否符合企业中后台常规，而不是跑偏成 demo 风？
+- 是否避免了“一次性样板间”式页面风格？
 
-## Reusability
+## 可复用性
 
-- Can the scaffold or page structure be reused on another admin project with minimal changes?
-- Are component boundaries reusable rather than domain-named one-offs?
-- Are request, mock, and type layers clearly separated?
-- Can backend APIs be connected later without rewriting page composition?
+- 脚手架或页面结构能否稍作修改就复用到另一个中后台项目？
+- 组件边界是否可复用，而不是满屏领域专属 one-off 组件？
+- 请求层、mock 层、类型层是否清晰分离？
+- 后续接真实后端时，是否不需要推翻页面组合结构？
 
-## Skill health
+## Skill 健康度
 
-- Did the result reveal a missing instruction in the skill?
-- Did the result reveal an over-specific instruction that should be generalized?
-- Did the result depend on unstated assumptions that should be added to the prompt templates?
-- Did the result require repeated manual correction in the same area?
-- Did the skill translate plain-language visual intent into implementable visual rules without needing design jargon from the user?
+- 这次结果是否暴露了 skill 指令缺失？
+- 这次结果是否暴露了某条规则过度具体，需要抽象？
+- 结果是否依赖了未写明的假设？
+- 是否出现了重复的人工修正点？
+- skill 是否能把用户的白话视觉诉求，翻译成可实现的设计规则？
 
-## Action after review
+## 评分标尺
 
-If the trial mainly exposed a local page issue, fix the sample.
+每个维度打分：
 
-If the trial exposed a recurring workflow issue, update the skill.
-# Validation Rubric
+- `2`：稳定
+- `1`：部分到位
+- `0`：明显不足
 
-Use this rubric after each validation scenario.
+总分解释：
 
-## Scoring method
+- `10-12`：可作为可用基线
+- `7-9`：方向正确，但还需打磨
+- `0-6`：skill 说明需要先重构，再继续扩展
 
-For each dimension, score:
+## 核心评分维度
 
-- `2`: solid
-- `1`: partial
-- `0`: weak or missing
+### 1. 结构优先
 
-Total score:
+是否先输出了：
 
-- `10-12`: usable baseline
-- `7-9`: promising but needs refinement
-- `0-6`: skill instructions need rework before further expansion
+- 产品目标
+- 路由树
+- 页面地图
 
-## Dimension 1: Structure first
+而不是一上来就写代码。
 
-Check whether the output produced:
+### 2. 页面模式映射
 
-- product goal
-- route tree
-- page map
+是否把页面正确映射到这些中后台模式：
 
-before jumping into code or visual detail.
+- 列表
+- 详情
+- 表单
+- 仪表盘
+- 审核队列
 
-## Dimension 2: Archetype mapping
+### 3. 企业中后台贴合度
 
-Check whether the output correctly mapped routes to reusable admin page archetypes such as:
+是否保持了这些基本盘：
 
-- list
-- detail
-- form
-- dashboard
-- review queue
+- 信息层级清晰
+- 筛选/搜索区明确
+- 视觉克制
+- 没有跑偏成驾驶舱或 demo 展示页
 
-## Dimension 3: Enterprise admin fit
+如果用户提到了风格，还要检查视觉决策卡是否把白话诉求转成了具体选择。
 
-Check whether the output stayed aligned with enterprise admin norms:
+### 4. 可复用组件能力
 
-- clear information hierarchy
-- obvious filter/search zones
-- restrained visual style
-- no decorative cockpit drift
-
-If style was requested, also check whether the visual decision card translated plain-language intent into concrete choices.
-
-## Dimension 4: Reusable components
-
-Check whether the component list is reusable across projects, for example:
+组件清单里是否有跨项目可复用的组件，例如：
 
 - `FilterBar`
 - `DataTable`
@@ -90,46 +83,33 @@ Check whether the component list is reusable across projects, for example:
 - `ActionBar`
 - `AuditTimeline`
 
-Weak score signs:
+低分信号：
 
-- too many domain-specific component names
-- page-level one-offs disguised as reusable components
+- 领域专属组件名过多
+- 页面级 one-off 被伪装成共享组件
 
-## Dimension 5: Front/back-end separation
+### 5. 前后端分离
 
-Check whether the output preserved:
+是否保持了：
 
-- service layer boundary
-- mock/data adapter boundary
-- clear future API docking points
+- service 层边界
+- mock / 数据 adapter 边界
+- 明确的未来 API 对接点
 
-## Dimension 6: Scaffoldability
+### 6. 脚手架连续性
 
-Check whether the result can naturally continue into:
+结果是否能自然继续推进到：
 
-- project scaffold
-- route files
-- shared layout
-- base business components
+- 项目脚手架
+- 路由文件
+- 共享 layout
+- 基础业务组件
 
-If the output is interesting but hard to continue into code, score this low.
+如果结果看着不错，但很难继续落代码，这一项应低分。
 
-## After scoring
+## 标准校验场景
 
-If one dimension repeatedly scores `0` or `1` across scenarios, update the skill references or prompt templates before testing more samples.
-# Validation Scenarios
-
-Use these as standard repeatable prompts to test the skill itself.
-
-The goal is not to produce the final business system. The goal is to see whether the skill can reliably convert short business requests into stable enterprise frontend outputs.
-
-## Scenario 1: List management
-
-### Purpose
-
-Tests whether the skill can reliably generate a classic management backend centered on list, filter, detail, and batch operations.
-
-### Prompt
+### 场景 1：列表管理后台
 
 ```text
 把下面这个需求当成一次 skill 验证样本，而不是单次项目交付。
@@ -149,21 +129,14 @@ Tests whether the skill can reliably generate a classic management backend cente
 先出原型，不接后端。
 ```
 
-### What this should expose
+主要观察：
 
-- list page archetype quality
-- filter zone completeness
-- detail page structure
-- batch action awareness
-- operation log and traceability awareness
+- 列表页模式是否稳
+- 筛选区是否完整
+- 详情页是否有可追溯结构
+- 是否考虑批量操作与日志
 
-## Scenario 2: Configuration form
-
-### Purpose
-
-Tests whether the skill can generate a configuration-heavy admin system instead of only table pages.
-
-### Prompt
+### 场景 2：配置型后台
 
 ```text
 把下面这个需求当成一次 skill 验证样本，而不是单次项目交付。
@@ -183,21 +156,14 @@ Tests whether the skill can generate a configuration-heavy admin system instead 
 先出原型，不写后端。
 ```
 
-### What this should expose
+主要观察：
 
-- form page archetype quality
-- grouped field design
-- configuration information density control
-- versioning and audit awareness
-- action bar and validation thinking
+- 表单页模式是否合理
+- 分组和信息密度是否可控
+- 是否考虑版本与审计
+- 是否具备校验与吸底操作栏意识
 
-## Scenario 3: Review queue
-
-### Purpose
-
-Tests whether the skill can produce approval and review workflows instead of plain CRUD pages.
-
-### Prompt
+### 场景 3：审核工作台
 
 ```text
 把下面这个需求当成一次 skill 验证样本，而不是单次项目交付。
@@ -217,22 +183,14 @@ Tests whether the skill can produce approval and review workflows instead of pla
 先出原型，不接后端。
 ```
 
-### What this should expose
+主要观察：
 
-- review queue archetype quality
-- drawer or side panel decisions
-- audit trail awareness
-- action priority clarity
-- detail and queue split quality
+- 审核队列是否突出效率
+- 详情区和动作区是否清晰
+- 是否正确处理材料预览与审计历史
+- 是否具备风险与状态表达能力
 
-## Recommended test order
+## 复盘动作
 
-1. `Scenario 1`
-2. `Scenario 2`
-3. `Scenario 3`
-
-Reason:
-
-- first validate the most common list management case
-- then validate form-heavy configuration complexity
-- finally validate workflow-heavy approval complexity
+- 如果问题只是某个样例页写得不好，优先修样例。
+- 如果问题是重复出现的流程缺陷，优先回改 skill 本身。

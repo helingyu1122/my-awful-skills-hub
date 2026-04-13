@@ -1,28 +1,28 @@
-# Install Notes
+# 安装说明
 
 ## Codex
 
-- Generated adapter path: `adapters/codex/`
-- Install target: `~/.codex/skills/frontend-react-rapid-delivery`
-- Preferred install mode: symlink
+- 生成后的 adapter 路径：`adapters/codex/`
+- 安装目标：`~/.codex/skills/frontend-react-rapid-delivery`
+- 推荐方式：软链
 
 ## Claude Code
 
-- Generated adapter path: `adapters/claude/CLAUDE.md`
-- Install target: target project root `CLAUDE.md`
-- Preferred install mode: symlink
-- For team use, keep the repository outside project code and link the adapter into the project
+- 生成后的 adapter 路径：`adapters/claude/CLAUDE.md`
+- 安装目标：目标项目根目录下的 `CLAUDE.md`
+- 推荐方式：软链
+- 团队使用时，建议把 skill 仓库放在项目外部，再把 adapter 链接进项目
 
 ## Cursor
 
-- Generated adapter path: `adapters/cursor/`
-- Install targets:
+- 生成后的 adapter 路径：`adapters/cursor/`
+- 安装目标：
   - `.cursor/rules/frontend-react-rapid-delivery.mdc`
-  - fallback `AGENTS.md`
-- Preferred install mode: symlink
+  - 兜底 `AGENTS.md`
+- 推荐方式：软链
 
-## Repository policy
+## 仓库约定
 
-- Edit `core/` and `skill.yaml`
-- Regenerate `adapters/` with `./scripts/build`
-- Do not treat generated adapters as the primary source of truth
+- 修改内容时优先编辑 `core/` 和 `skill.yaml`
+- 改完后用 `./scripts/build` 重新生成 `adapters/`
+- 不要把生成后的 adapter 当作主源长期手改

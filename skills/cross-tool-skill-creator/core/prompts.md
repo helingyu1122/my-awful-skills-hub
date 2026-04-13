@@ -1,6 +1,6 @@
-# Prompt Templates
+# Prompt 模板
 
-## Template 1: One-shot skill creation
+## 模板 1：一次性创建新 skill
 
 ```text
 请用 cross-tool-skill-creator 直接帮我创建一个新 skill。
@@ -21,7 +21,7 @@ skill id: [skill-id]
 5. 告诉我结果
 ```
 
-## Template 2: Convert rough draft into a full skill
+## 模板 2：把草稿直接落成 skill
 
 ```text
 请用 cross-tool-skill-creator 把这份草稿直接落成一个新 skill。
@@ -39,7 +39,7 @@ skill id: [skill-id]
 - 最后 build 和 doctor
 ```
 
-## Template 3: Ingest Claude draft and normalize
+## 模板 3：导入 Claude 草稿并规范化
 
 ```text
 请用 cross-tool-skill-creator 处理这份从 Claude Code 导出的内容。

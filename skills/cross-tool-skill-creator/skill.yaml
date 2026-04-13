@@ -1,7 +1,7 @@
 id: cross-tool-skill-creator
-name: Cross Tool Skill Creator
+name: 跨工具 Skill 创建器
 version: 0.1.0
-summary: Create platform-agnostic skill source content that can be adapted to Codex, Claude Code, and Cursor.
+summary: 创建可同时适配 Codex、Claude Code 和 Cursor 的跨工具 skill 源内容。
 platforms:
   codex: true
   claude: true

@@ -1,94 +1,94 @@
-# Cross Tool Skill Creator
+# 跨工具 Skill 创建器
 
-Create platform-agnostic skill source content that can be adapted to Codex, Claude Code, and Cursor.
+创建可同时适配 Codex、Claude Code 和 Cursor 的跨工具 skill 源内容。
 
-## Intent
+## 意图
 
-# Intent
+# 意图
 
-This skill is for creating new skills in the `skills-repo` format.
+这个 skill 用于创建符合 `skills-repo` 规范、可被 Codex、Claude Code、Cursor 共同消费的新 skill 源内容。
 
-## Use it for
+## 适用场景
 
-- defining new cross-tool skills
-- converting a rough idea into `core/` source files
-- normalizing skill drafts from Claude Code or project notes
-- enforcing repository structure before adapter generation
-- helping team members write reusable skill source content
+- 定义新的跨工具 skill
+- 把一个模糊想法落成 `core/` 源文件
+- 把 Claude Code 或项目笔记里的草稿规范化整理
+- 在生成 adapters 之前，先把仓库结构和边界理顺
+- 帮助团队成员持续产出可复用的 skill 内容，而不是一次性说明文档
 
-## Default assumptions
+## 默认假设
 
-- `core/` is the source of truth
-- adapters are generated artifacts
-- the goal is cross-tool reuse, not one-platform optimization first
-- examples are validation samples, not permanent structure
+- `core/` 是唯一可信源
+- adapters 是生成产物
+- 目标是跨工具复用，而不是先为某个平台做过度定制
+- 示例只是验证样本，不是永久写死的结构
 
-## Typical outputs
+## 典型产出
 
 - `skill.yaml`
 - `core/intent.md`
 - `core/workflow.md`
 - `core/prompts.md`
 - `core/patterns.md`
-- `core/style.md` when relevant
+- `core/style.md`（仅在确实需要视觉规则时）
 - `core/validation.md`
 - `core/install-notes.md`
 
-## Workflow
+## 工作流
 
-# Workflow
+# 工作流
 
-## Standard flow
+## 标准流程
 
-1. Understand the requested capability and confirm it is skill-worthy.
-2. Collect the minimum creation inputs:
+1. 先理解用户要沉淀的能力，确认这件事是否值得做成 skill。
+2. 收集最小创建输入：
    - skill id
-   - display name
-   - one-line summary
-   - whether style rules are needed
-3. Call `./scripts/create-skill <skill-id> <display-name> <summary> [--style yes|no]`.
-4. Open the generated starter files under `skills/<skill-id>/core/`.
-5. Replace the starter TODO blocks with real reusable source content.
-6. Re-run `./scripts/build <skill-id>` after refinement.
-7. Re-run `./scripts/doctor <skill-id>` and report readiness.
+   - 展示名称
+   - 一句话摘要
+   - 是否需要视觉风格规则
+3. 调用 `./scripts/create-skill <skill-id> <display-name> <summary> [--style yes|no]`。
+4. 打开生成后的 `skills/<skill-id>/core/` starter 文件。
+5. 用真实、可复用的规则替换 starter 里的 TODO 块。
+6. 执行 `./scripts/build <skill-id>` 重新生成 adapters。
+7. 执行 `./scripts/doctor <skill-id>` 做完整性检查，并汇报 readiness。
 
-## Skill-worthiness check
+## 是否值得做成 skill
 
-Create a skill when at least one of these is true:
+当满足以下任一条件时，应该做成 skill：
 
-- the workflow is repeated often
-- the workflow has non-obvious steps or decision rules
-- the team needs consistent outputs across projects
-- adapters or tooling differ by platform but the core knowledge is shared
+- 这个工作流会被重复执行
+- 工作流里存在不明显的步骤或判断规则
+- 团队希望在不同项目里保持产出一致
+- 不同工具的 adapter 形式不同，但核心知识是共享的
 
-Do not create a skill when the content is just a one-off project note.
+如果内容只是一次性项目笔记，不要硬做成 skill。
 
-## Orchestration rule
+## 编排规则
 
-Do not ask the user to create files manually when the repository scripts can do it.
+当仓库脚本可以完成结构化动作时，不要再让用户手工建文件。
 
-Prefer this order:
+推荐顺序永远是：
 
-1. call `create-skill`
-2. refine generated `core/*.md`
-3. rebuild
-4. doctor check
+1. 先调用 `create-skill`
+2. 再补全 `core/*.md`
+3. 然后 rebuild
+4. 最后 doctor 检查
 
-## Output contract
+## 输出约定
 
-When helping create a new skill, produce in this order:
+当你帮助用户创建新 skill 时，优先按这个顺序组织结果：
 
-1. creation inputs
-2. confirmation that `create-skill` should be called
-3. refined `core/*.md` content
-4. validation scenarios
-5. readiness summary
+1. 创建输入确认
+2. 确认将调用 `create-skill`
+3. 补全后的 `core/*.md` 内容
+4. 校验场景
+5. readiness 总结
 
-## Prompts
+## Prompt 模板
 
-# Prompt Templates
+# Prompt 模板
 
-## Template 1: One-shot skill creation
+## 模板 1：一次性创建新 skill
 
 ```text
 请用 cross-tool-skill-creator 直接帮我创建一个新 skill。
@@ -109,7 +109,7 @@ skill id: [skill-id]
 5. 告诉我结果
 ```
 
-## Template 2: Convert rough draft into a full skill
+## 模板 2：把草稿直接落成 skill
 
 ```text
 请用 cross-tool-skill-creator 把这份草稿直接落成一个新 skill。
@@ -127,7 +127,7 @@ skill id: [skill-id]
 - 最后 build 和 doctor
 ```
 
-## Template 3: Ingest Claude draft and normalize
+## 模板 3：导入 Claude 草稿并规范化
 
 ```text
 请用 cross-tool-skill-creator 处理这份从 Claude Code 导出的内容。
@@ -143,176 +143,174 @@ skill id: [skill-id]
 4. build 和 doctor
 ```
 
-## Patterns
+## 模式
 
-# Patterns
+# 模式
 
-## File-by-file responsibility
+## 各文件职责
 
 ### intent.md
 
-Write:
+应写：
 
-- what the skill is for
-- use cases
-- boundaries
-- default assumptions
-- typical outputs
+- skill 的用途
+- 适用场景
+- 边界
+- 默认假设
+- 典型产出
 
-Avoid:
+不要写：
 
-- long tool-specific syntax
-- adapter instructions
+- 大段平台专属语法
+- adapter 级安装细节
 
 ### workflow.md
 
-Write:
+应写：
 
-- the stable process
-- ordering rules
-- key decision points
-- output contract
+- 稳定流程
+- 顺序规则
+- 关键判断点
+- 输出约定
 
-Avoid:
+不要写：
 
-- lots of examples with no procedural value
+- 只有展示作用、没有流程价值的大量示例
 
 ### prompts.md
 
-Write:
+应写：
 
-- user input templates
-- short prompts that can be copied directly
-- intake templates for rough drafts or imports
+- 用户输入模板
+- 可以直接复制使用的简短 prompt
+- 面向 rough draft 或导入内容的 intake 模板
 
 ### patterns.md
 
-Write:
+应写：
 
-- reusable patterns
-- archetypes
-- classification rules
-- common structures or decomposition rules
+- 可复用模式
+- 分类方法
+- 常见结构
+- 拆解规则
 
 ### style.md
 
-Only use when the skill needs visual intake, visual presets, image interpretation, or design constraints.
+只有在 skill 真正依赖视觉输入、风格预设、图片理解或设计约束时才需要写复杂内容。
 
 ### validation.md
 
-Write:
+应写：
 
-- test scenarios
-- scoring criteria
-- pass/fail or rubric rules
+- 测试场景
+- 评分或通过规则
+- pass/fail 条件
 
 ### install-notes.md
 
-Write:
+应写：
 
-- adapter differences
-- install targets
-- repository policy for source vs generated files
+- 不同 adapter 的差异
+- 安装目标
+- 仓库中“源文件”和“生成文件”的边界规则
 
-## Cross-tool writing rule
+## 跨工具写作规则
 
-If a rule is only true for one platform, it does not belong in the main core files unless you clearly mark it as install or adapter guidance.
+如果某条规则只在单个平台成立，就不要直接写进 `core/` 主源，除非你明确标记它属于安装或 adapter 指南。
 
-## Example rule
+## 示例规则
 
-Good:
+好的规则：
 
-- `produce a visual decision card before page prototype when style matters`
+- `风格相关时，先输出视觉决策卡，再进入页面原型`
 
-Bad:
+不好的规则：
 
-- `put this section under CLAUDE.md exactly like this`
+- `CLAUDE.md 必须逐字写成这个样子`
 
-## Style
+## 风格
 
-# Style
+# 风格
 
-Most skills do not need `style.md`.
+大多数 skill 并不需要复杂的 `style.md`。
 
-Create `style.md` only if the skill depends on:
+只有当 skill 明确依赖这些能力时，才应该把 `style.md` 写成完整模块：
 
-- visual direction
-- style translation from plain language
-- reference-image interpretation
-- output aesthetics or design constraints
+- 视觉方向定义
+- 白话风格翻译
+- 参考图或截图风格提炼
+- 审美或设计约束
 
-If the skill is not visual in nature, omit style-specific complexity and keep the file minimal.
+如果 skill 本身并非视觉类，请保持 `style.md` 极简，避免引入无意义复杂度。
 
-## If style is needed
+## 当确实需要 style.md 时
 
-Keep it reusable:
+优先保证内容可复用：
 
-- visual intake rules
-- presets
-- translation of plain-language style requests
-- image-to-style extraction rules
+- 视觉输入规则
+- 风格预设
+- 白话风格到设计约束的映射
+- 图片到风格特征的提炼规则
 
-Do not fill `style.md` with project-specific brand details unless the skill is explicitly brand-bound.
+除非 skill 本身就是品牌专属，否则不要在这里写死项目品牌细节。
 
-## Validation
+## 校验
 
-# Validation
+# 校验
 
-## Minimum checklist
+## 最低通过条件
 
-A new skill passes minimum quality only if:
+一个新 skill 只有在满足以下条件时，才算达到最低质量：
 
-- `skill.yaml` is complete
-- all required `core/` files exist
-- core files are platform-agnostic
-- at least one validation scenario exists
-- adapter generation can happen without rewriting the core files
+- `skill.yaml` 完整
+- 必需的 `core/` 文件齐全
+- `core/` 内容保持平台无关
+- 至少存在一个可复现的校验场景
+- 生成 adapters 时不需要反过来重写 `core/`
 
-## Review questions
+## 复盘问题
 
-- Is the skill solving a repeatable problem?
-- Is the source content reusable across projects?
-- Did we accidentally mix platform adapter content into core files?
-- Are examples short and clearly subordinate to the rules?
-- Could another teammate maintain this skill without asking the original author?
+- 这个 skill 解决的是不是一个重复出现的问题？
+- 源内容是否真的能跨项目复用？
+- 有没有把某个平台的 adapter 内容误塞进 `core/`？
+- 示例是否足够短，并且从属于规则本身？
+- 另一个团队成员接手时，能否不依赖原作者继续维护？
 
-## Suggested validation scenarios
+## 推荐校验场景
 
-- ideal input scenario
-- vague input scenario
-- imported rough-draft scenario
+- 理想输入场景
+- 模糊输入场景
+- 导入草稿场景
 
-## Failure conditions
+## 失败信号
 
-Refine the source content before build if:
+如果出现下面情况，应先回改源内容，再 build：
 
-- the skill is really just a project note
-- core files duplicate one another heavily
-- prompts are too vague to be reusable
-- the workflow depends on one tool's syntax
+- 这个所谓 skill 实际上只是项目笔记
+- `core/` 文件之间高度重复
+- prompt 模板过于模糊，不具备可复用性
+- 工作流强依赖单个平台语法
 
-## Install Notes
+## 安装说明
 
-# Install Notes
+# 安装说明
 
-## Purpose
+## 目的
 
-This skill is a repository maintainer skill. It should orchestrate repository scripts instead of asking teammates to create files manually.
+这是一个仓库维护型 skill。它的职责是编排仓库脚本，而不是要求团队成员手工创建目录和文件。
 
-## Repository policy
+## 仓库约定
 
-- call `./scripts/create-skill` for new skills
-- edit `core/` and `skill.yaml`
-- do not treat generated adapters as the primary source
-- run `./scripts/build <skill-id>` after edits
-- run `./scripts/doctor <skill-id>` before marking the skill ready
+- 新建 skill 时优先调用 `./scripts/create-skill`
+- 平时主要编辑 `core/` 和 `skill.yaml`
+- 不要把生成后的 adapters 当作主源
+- 改完后执行 `./scripts/build <skill-id>`
+- 标记 ready 前执行 `./scripts/doctor <skill-id>`
 
-## Team usage
-
-Recommended sequence:
+## 团队推荐顺序
 
 1. `./scripts/create-skill <skill-id> <display-name> <summary>`
-2. use this meta skill to replace the starter TODO blocks
-3. review and adjust `catalog.yaml` if needed
+2. 用这个 meta skill 替换 starter 里的 TODO 内容
+3. 必要时检查并调整 `catalog.yaml`
 4. `./scripts/build <skill-id>`
 5. `./scripts/doctor <skill-id>`

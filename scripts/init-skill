@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/lib.sh"
 ROOT="$(repo_root)"
 
 if [ $# -lt 2 ]; then
-  echo "Usage: ./scripts/init-skill <skill-id> <display-name>" >&2
+  echo "用法: ./scripts/init-skill <skill-id> <display-name>" >&2
   exit 1
 fi
 
@@ -16,7 +16,7 @@ name="$2"
 dir="$(skill_dir "$ROOT" "$skill")"
 
 if [ -e "$dir" ]; then
-  echo "Skill already exists: $skill" >&2
+  echo "Skill 已存在: $skill" >&2
   exit 1
 fi
 
@@ -25,7 +25,7 @@ cat <<EOF_SKILL > "$dir/skill.yaml"
 id: $skill
 name: $name
 version: 0.1.0
-summary: TODO summary
+summary: TODO 摘要
 platforms:
   codex: true
   claude: true
@@ -56,5 +56,5 @@ TODO
 EOF_FILE
 done
 
-echo "initialized $dir"
-echo "Next steps: fill core/*.md, update catalog.yaml, then run ./scripts/build $skill"
+echo "已初始化: $dir"
+echo "下一步: 补全 core/*.md，更新 catalog.yaml，然后执行 ./scripts/build $skill"

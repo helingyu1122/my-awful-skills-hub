@@ -1,311 +1,237 @@
-# Visual Intake
+# 视觉输入
 
-## Purpose
+## 目的
 
-Use this file when the user is not a designer and describes style in plain language.
+这个文件用于帮助“不懂设计术语、但知道自己想要什么感觉”的用户，把模糊视觉诉求翻译成明确的前端约束。
 
-The job is to translate fuzzy visual intent into concrete frontend constraints before prototyping.
+## 用户常见输入方式
 
-## Input types
+用户可能通过这些方式描述风格：
 
-The user may describe style through:
+- 直接说形容词
+- 给参考产品
+- 贴截图或 UI 图片
+- 用否定句表达不要什么，例如 `不要花哨`
 
-- plain adjectives
-- example products
-- screenshots or UI images
-- rejection statements such as `不要花哨`
+## 翻译规则
 
-## Translation rule
+不要要求用户先学设计黑话。应该把日常表达翻译成具体决策。
 
-Do not ask the user for design jargon.
-
-Translate everyday language into concrete decisions.
-
-Examples:
+例如：
 
 - `稳重`
-  - low saturation
-  - light neutral backgrounds
-  - restrained accent color usage
-  - regular spacing rhythm
+  - 低饱和配色
+  - 浅中性色背景
+  - 点缀色使用克制
+  - 间距节奏规则
 - `专业`
-  - clear hierarchy
-  - readable table/form structure
-  - limited decorative elements
+  - 层级清晰
+  - 表格和表单结构可读
+  - 装饰元素少
 - `高级一点`
-  - fewer colors
-  - more consistent spacing
-  - lighter shadows
-  - tighter typography hierarchy
+  - 颜色更少
+  - 间距更统一
+  - 阴影更轻
+  - 字体层级更克制
 - `像后台`
-  - strong filter zone
-  - table-first layouts
-  - clear navigation
-  - compact interaction patterns
+  - 筛选区明确
+  - 以表格和表单为主
+  - 导航清楚
+  - 交互更紧凑
 - `不要大屏感`
-  - avoid dark cockpit look
-  - avoid oversized charts
-  - avoid glowing gradients
-  - avoid visual over-decoration
+  - 避免深色驾驶舱
+  - 避免夸张巨图表
+  - 避免发光渐变
+  - 避免装饰性过强
 - `不要太丑`
-  - reduce randomness
-  - unify radius and spacing
-  - avoid mixed visual languages
+  - 降低随机感
+  - 统一圆角和间距
+  - 避免混杂视觉语言
 - `蓝色忧郁`
-  - low-saturation blue-gray palette
-  - calm and slightly cool emotional tone
-  - medium density instead of empty luxury layout
-  - restrained highlights, not neon blue
+  - 低饱和蓝灰主色
+  - 冷静、略克制的情绪
+  - 适中的信息密度，而不是空旷豪华感
+  - 高亮克制，不要霓虹蓝
 - `不要太土`
-  - avoid cheap-looking gradients
-  - avoid too many unrelated colors
-  - reduce decorative chart treatments
-  - keep typography and spacing consistent
+  - 避免廉价渐变
+  - 避免杂乱多色
+  - 降低花式图表修饰
+  - 统一排版和间距
 
-## Reference products
+## 参考产品处理规则
 
-When the user mentions a known product, do not imitate branding. Extract only reusable traits.
+用户提到知名产品时，不要模仿品牌，只提炼可复用特征。
 
-Examples:
+例如：
 
 - `飞书后台`
-  - calm enterprise productivity feel
-  - clean spacing
-  - moderate density
-  - practical cards and tables
+  - 冷静的企业协作感
+  - 清爽间距
+  - 中等信息密度
+  - 实用的卡片与表格
 - `阿里云控制台`
-  - strong platform feel
-  - dense navigation and management structure
-  - clear state display
-  - strong operational orientation
+  - 强平台感
+  - 更密的导航和管理结构
+  - 状态展示清楚
+  - 操作导向更强
 
-## Output format
+## 输出格式
 
-Prefer this shape:
+风格相关时，优先产出这张卡片：
 
 ```md
-Visual Decision Card
-- Style keywords:
-- Reference feel:
-- Palette direction:
-- Typography tone:
-- Density:
-- Navigation:
-- Table style:
-- Form style:
-- Chart style:
-- Do not do:
+视觉决策卡
+- 风格关键词：
+- 参考气质：
+- 配色方向：
+- 字体语气：
+- 信息密度：
+- 导航方式：
+- 表格风格：
+- 表单风格：
+- 图表风格：
+- 明确不要：
 ```
 
-## Rule for non-design users
+## 非设计背景用户规则
 
-If the user only says `你帮我定`, do not stop. Choose a safe enterprise-admin preset from `style-presets.md`, state the choice clearly, and continue.
-# Style Presets
+如果用户只说 `你帮我定`，不要停下来。直接从下面的预设里选一个最稳的企业中后台方案，并明确告知你的选择。
 
-Use these presets when the user gives broad style goals but does not specify detailed visual rules.
+# 风格预设
 
-## Preset A: Calm Enterprise
+## 预设 A：稳重企业型
 
-Use when the user says:
+适用表达：
 
 - 稳重
 - 专业
 - 企业中后台
 - 不要花哨
 
-Traits:
+特征：
 
-- light neutral background
-- blue or slate accent
-- medium information density
-- restrained cards
-- clear filter areas
-- readable tables
-- weak shadow, moderate radius
+- 浅中性色背景
+- 蓝色或石板灰点缀
+- 中等信息密度
+- 卡片克制
+- 筛选区明确
+- 表格可读性优先
+- 弱阴影、中等圆角
 
-Avoid:
+避免：
 
-- giant hero areas
-- dark cockpit visuals
-- colorful gradients
+- 巨型 hero
+- 深色驾驶舱
+- 多彩渐变
 
-## Preset B: Platform Console
+## 预设 B：平台控制台型
 
-Use when the user says:
+适用表达：
 
 - 平台型
 - 控制台
 - 像云平台
 - 运维后台
 
-Traits:
+特征：
 
-- stronger navigation hierarchy
-- denser layout
-- state-first visual emphasis
-- compact cards
-- heavier table usage
-- stronger secondary panels
+- 更强的导航层级
+- 更紧凑的布局
+- 状态优先
+- 卡片更紧
+- 表格占比更高
+- 辅助面板更明确
 
-Avoid:
+避免：
 
-- marketing-style storytelling blocks
-- oversized whitespace
+- 官网式叙事块
+- 过大的留白
 
-## Preset C: Light Operations
+## 预设 C：轻量运营型
 
-Use when the user says:
+适用表达：
 
 - 轻量
 - 简洁
 - 日常运营
 - 不要太重
 
-Traits:
+特征：
 
-- more breathing room
-- fewer border layers
-- smaller number of KPI cards
-- simpler chart treatment
+- 更多呼吸感
+- 边框层级更少
+- KPI 卡数量更少
+- 图表处理更克制
 
-Avoid:
+避免：
 
-- heavy control-panel density
-- too many stacked cards
+- 过重的控制台密度
+- 过多堆叠卡片
 
-## Preset D: Review Workspace
+## 预设 D：审核工作台型
 
-Use when the user says:
+适用表达：
 
 - 审核
 - 审批
 - 可追溯
 - 风控
 
-Traits:
+特征：
 
-- queue plus detail split
-- explicit action panels
-- timeline and audit emphasis
-- status and risk indicators
-- calm but serious color language
+- 队列 + 详情分栏
+- 明确的动作区
+- 强调时间线与审计信息
+- 状态和风险标识清楚
+- 整体冷静但严肃
 
-Avoid:
+避免：
 
-- hiding actions inside generic dropdowns
-- decorative dashboards replacing work surfaces
+- 把关键操作藏进普通下拉菜单
+- 用装饰性仪表盘代替工作面
 
-## Preset E: Configuration Workspace
+## 预设 E：配置工作台型
 
-Use when the user says:
+适用表达：
 
 - 配置
 - 映射
 - 模板
 - 版本
 
-Traits:
+特征：
 
-- grouped form sections or split workspace
-- sticky action bar
-- validation state visibility
-- version and audit visibility
-- form density handled through grouping
+- 分组表单或左右工作台
+- 吸底操作栏
+- 校验状态清晰可见
+- 版本与审计信息显式展示
+- 通过分组控制表单密度
 
-Avoid:
+避免：
 
-- giant ungrouped forms
-- burying validation and publish actions
+- 巨型无分组表单
+- 把校验和发布动作埋得太深
 
-## Preset F: Blue Dusk Admin
+## 预设 F：蓝灰忧郁型后台
 
-Use when the user says:
+适用表达：
 
 - 蓝色忧郁
-- 冷一点
-- 不要太土
 - 偏蓝灰
-- 想要克制一点
+- 不要太土
+- 信息密度适中
 
-Traits:
+特征：
 
-- low-saturation blue-gray palette
-- medium information density
-- calm enterprise-admin temperament
-- soft glassy or misty surfaces used sparingly
-- charts and cards kept restrained
-- ledger or governance-console feel
+- 低饱和蓝灰主色
+- 中浅背景 + 冷静表面层
+- 中等偏上的信息密度
+- 表格和图表都克制，不追求秀肌肉
+- 状态色依然清晰，但主色不艳
 
-Avoid:
+避免：
 
-- neon blue
-- loud gradients
-- dashboard cockpit visuals
-- overly playful rounded consumer-app styling
-# Image To Style Rules
-
-Use this file when the user provides screenshots or reference images.
-
-## Goal
-
-Do not copy the reference literally.
-
-Extract reusable style signals and turn them into implementable frontend rules.
-
-## What to inspect
-
-For each image, inspect:
-
-- background brightness
-- navigation layout
-- spacing density
-- card borders vs shadows
-- table density
-- form density
-- primary accent color
-- radius strength
-- chart temperament
-
-## What to output
-
-After inspecting the images, summarize:
-
-- what to borrow
-- what not to borrow
-- what to convert for enterprise admin use
-
-## Example transformation
-
-If the reference image has:
-
-- large gradient hero
-- oversized cards
-- low information density
-
-and the target is admin backend:
-
-- borrow the color restraint if useful
-- do not borrow the hero layout
-- compress spacing
-- convert cards into tables or practical panels
-
-## Safety rule
-
-If an image is visually attractive but structurally bad for enterprise admin work, say so clearly and only borrow the useful parts.
-
-## Output shape
-
-```md
-Image Style Summary
-- Borrow:
-- Do not borrow:
-- Convert for admin use:
-
-Visual Decision Card
-- Style keywords:
-- Palette direction:
-- Density:
-- Navigation:
-- Table/Form treatment:
-- Do not do:
-```
+- 霓虹蓝
+- 科技大屏感
+- 花哨渐变块
+- 炫技仪表盘布局

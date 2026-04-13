@@ -1,17 +1,17 @@
-# Skill Format
+# Skill 格式说明
 
-Each skill keeps one platform-agnostic source of truth under `core/` and one or more generated platform adapters under `adapters/`.
+每个 skill 在 `core/` 下维护一份平台无关的源内容，在 `adapters/` 下维护一份或多份由脚本生成的适配产物。
 
-## Fast creation path
+## 快速创建路径
 
-Use this sequence:
+推荐按下面的顺序走：
 
 1. `./scripts/create-skill <skill-id> <display-name> <summary>`
-2. refine the starter `core/*.md` files with `cross-tool-skill-creator`
-3. run `./scripts/build <skill-id>`
-4. run `./scripts/doctor <skill-id>`
+2. 使用 `cross-tool-skill-creator` 补全 starter `core/*.md`
+3. `./scripts/build <skill-id>`
+4. `./scripts/doctor <skill-id>`
 
-## Required files
+## 必需文件
 
 ```text
 skills/<skill-id>/
@@ -30,9 +30,9 @@ skills/<skill-id>/
 
 ```yaml
 id: frontend-react-rapid-delivery
-name: Frontend React Rapid Delivery
+name: React 企业前端快速交付
 version: 0.1.0
-summary: React-first enterprise frontend workflow
+summary: 面向企业中后台的 React 前端设计、原型与页面交付工作流。
 platforms:
   codex: true
   claude: true
@@ -54,10 +54,16 @@ adapters:
     enabled: true
 ```
 
-## Core design rules
+## 设计规则
 
-- `core/` stores platform-neutral knowledge and workflow.
-- `adapters/` are generated artifacts.
-- Platform-specific phrasing belongs in the adapter template or build script, not in the core files.
-- Team edits should prefer `core/` and `skill.yaml`.
-- `create-skill` can generate a starter package, but real reusable content still needs refinement.
+- `core/` 存放平台无关的知识、工作流、提示模板和校验规则。
+- `adapters/` 是生成产物，不是长期手工维护的主源。
+- 平台特有的话术，应该放在 build 脚本或 adapter 模板中，而不是塞进 `core/`。
+- 团队协作时，优先修改 `core/` 和 `skill.yaml`。
+- `create-skill` 只负责生成 starter 包；真正能复用的规则和模板，需要继续完善。
+
+## 语言约定
+
+- 面向团队阅读的说明内容默认用中文。
+- `skill-id`、目录名、脚本名、命令参数名保持英文。
+- 如果需要兼顾中英术语，优先采用中文说明 + 英文关键字并列的写法。

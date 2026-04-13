@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/lib.sh"
 ROOT="$(repo_root)"
 
 if [ $# -lt 1 ]; then
-  echo "Usage: ./scripts/doctor <skill-id> [--project /path/to/project]" >&2
+  echo "用法: ./scripts/doctor <skill-id> [--project /path/to/project]" >&2
   exit 1
 fi
 
@@ -21,7 +21,7 @@ while [ $# -gt 0 ]; do
       shift 2
       ;;
     *)
-      echo "Unknown argument: $1" >&2
+      echo "未知参数: $1" >&2
       exit 1
       ;;
   esac
@@ -30,19 +30,19 @@ done
 require_skill "$ROOT" "$skill"
 DIR="$(skill_dir "$ROOT" "$skill")"
 
-echo "repo: $ROOT"
+echo "仓库: $ROOT"
 echo "skill: $skill"
-echo "skill.yaml: $(test -f "$DIR/skill.yaml" && echo ok || echo missing)"
-echo "core files:"
+echo "skill.yaml: $(test -f "$DIR/skill.yaml" && echo 正常 || echo 缺失)"
+echo "core 文件:"
 for file in intent workflow prompts patterns style validation install-notes; do
   if [ -f "$DIR/core/$file.md" ]; then
-    echo "  - $file.md: ok"
+    echo "  - $file.md: 正常"
   else
-    echo "  - $file.md: missing"
+    echo "  - $file.md: 缺失"
   fi
 done
 
-echo "adapters:"
+echo "adapter 文件:"
 for path in \
   "$DIR/adapters/codex/SKILL.md" \
   "$DIR/adapters/codex/agents/openai.yaml" \
@@ -50,32 +50,32 @@ for path in \
   "$DIR/adapters/cursor/rules/$skill.mdc" \
   "$DIR/adapters/cursor/AGENTS.md"; do
   if [ -e "$path" ]; then
-    echo "  - $path: ok"
+    echo "  - $path: 正常"
   else
-    echo "  - $path: missing"
+    echo "  - $path: 缺失"
   fi
 done
 
 if [ -L "$HOME/.codex/skills/$skill" ]; then
-  echo "codex install: $(readlink "$HOME/.codex/skills/$skill")"
+  echo "Codex 安装: $(readlink "$HOME/.codex/skills/$skill")"
 else
-  echo "codex install: not linked"
+  echo "Codex 安装: 未链接"
 fi
 
 if [ -n "$project" ]; then
   if [ -L "$project/CLAUDE.md" ]; then
-    echo "claude install: $(readlink "$project/CLAUDE.md")"
+    echo "Claude 安装: $(readlink "$project/CLAUDE.md")"
   else
-    echo "claude install: not linked"
+    echo "Claude 安装: 未链接"
   fi
   if [ -L "$project/.cursor/rules/$skill.mdc" ]; then
-    echo "cursor rule install: $(readlink "$project/.cursor/rules/$skill.mdc")"
+    echo "Cursor 规则安装: $(readlink "$project/.cursor/rules/$skill.mdc")"
   else
-    echo "cursor rule install: not linked"
+    echo "Cursor 规则安装: 未链接"
   fi
   if [ -L "$project/AGENTS.md" ]; then
-    echo "cursor AGENTS install: $(readlink "$project/AGENTS.md")"
+    echo "Cursor AGENTS 安装: $(readlink "$project/AGENTS.md")"
   else
-    echo "cursor AGENTS install: not linked"
+    echo "Cursor AGENTS 安装: 未链接"
   fi
 fi

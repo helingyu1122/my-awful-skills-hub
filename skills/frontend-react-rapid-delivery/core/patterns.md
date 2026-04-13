@@ -1,123 +1,120 @@
-# Admin Patterns
+# 中后台模式
 
-## Purpose
+## 目的
 
-Use these patterns to avoid reinventing enterprise admin pages for every request.
+这些模式用于避免每次都从零发明企业中后台页面结构。
 
-## Core page archetypes
+## 核心页面类型
 
-### 1. List page
+### 1. 列表页
 
-Use when the task is management, querying, operation, reconciliation, or reporting entry.
+适用于：管理、查询、操作入口、对账、统计入口。
 
-Default structure:
+默认结构：
 
-- page title
-- filter/search area
-- summary strip when useful
-- data table
-- row actions
-- batch actions
-- pagination
+- 页面标题
+- 筛选/搜索区
+- 摘要条（需要时）
+- 数据表格
+- 行内操作
+- 批量操作
+- 分页
 
-### 2. Detail page
+### 2. 详情页
 
-Use when the task is record inspection, drill-down, or traceability.
+适用于：记录查看、下钻分析、可追溯场景。
 
-Default structure:
+默认结构：
 
-- primary summary card
-- status and key identifiers
-- tabs or grouped sections
-- timeline or operation log
-- related records
+- 主摘要卡
+- 状态与关键标识
+- Tabs 或分组区块
+- 时间线或操作日志
+- 关联记录
 
-### 3. Form page
+### 3. 表单页
 
-Use when the task is create/edit/configure/submit.
+适用于：新增、编辑、配置、提交。
 
-Default structure:
+默认结构：
 
-- concise guidance area
-- grouped fields
-- inline validation
-- sticky action bar
-- change history when needed
+- 简洁引导区
+- 分组字段
+- 行内校验
+- 吸底操作栏
+- 变更历史（需要时）
 
-When the page is configuration-dense, explicitly decide one of these layouts:
+当页面配置项很多时，要明确判断更适合哪种布局：
 
-- grouped form sections
-- tabbed configuration
-- step form
-- split workspace with left source panel and right configuration panel
+- 分组表单区块
+- Tabs 配置
+- 分步表单
+- 左侧来源、右侧配置的工作台布局
 
-If versioning or publishing is involved, also surface:
+如果存在版本、发布、回滚，也要显式暴露：
 
-- draft state
-- validation state
-- publish action
-- rollback or compare entry
+- 草稿状态
+- 校验状态
+- 发布动作
+- 回滚或比对入口
 
-### 4. Dashboard page
+### 4. 仪表盘页
 
-Use when the task is monitoring, governance, or executive overview.
+适用于：监控、治理、概览、经营看板。
 
-Default structure:
+默认结构：
 
-- filter area
-- KPI cards
-- one or two main trend charts
-- ranking or distribution panels
-- action-oriented alerts
+- 筛选区
+- KPI 卡片
+- 一到两个主趋势图
+- 排名或分布面板
+- 可执行告警
 
-Do not turn dashboards into decorative cockpits unless the user explicitly wants that style.
+除非用户明确要求，不要把仪表盘做成装饰性驾驶舱。
 
-### 5. Review queue page
+### 5. 审核队列页
 
-Use when the task is approval, review, audit, or exception handling.
+适用于：审批、复核、审核、异常处理。
 
-Default structure:
+默认结构：
 
-- queue filters
-- result table
-- detail drawer or side panel
-- audit information
-- explicit next actions
+- 队列筛选区
+- 结果表格
+- 详情抽屉或侧边详情面板
+- 审计信息
+- 明确的下一步动作
 
-Also consider:
+额外关注：
 
-- assignee
-- SLA or timeout marker
-- priority marker
-- reason selector for reject/return actions
-- material preview strategy
+- 指派人
+- SLA 或超时标识
+- 优先级
+- 驳回/退回原因选择器
+- 材料预览策略
 
-## Layout defaults
+## 布局默认值
 
-For enterprise admin systems, prefer:
+对企业中后台，优先采用：
 
-- left navigation or top navigation with clear hierarchy
-- shallow visual hierarchy
-- white or light neutral surfaces
-- dense but readable tables
-- restrained color usage focused on state and alerts
+- 左侧导航或顶部导航，层级清楚
+- 克制但清晰的视觉层级
+- 白色或浅中性色表面
+- 信息密度适中偏高但仍可读的表格
+- 颜色主要用于状态和提醒，而不是装饰
 
-## Component defaults
+## 组件默认映射
 
-Map archetypes to reusable components:
+把页面类型映射到可复用组件：
 
-- list page -> `FilterBar`, `SummaryStrip`, `DataTable`
-- detail page -> `ProfileCard`, `InfoGrid`, `Timeline`
-- form page -> `SectionForm`, `FieldRow`, `ActionBar`
-- dashboard page -> `MetricCard`, `TrendPanel`, `RankingPanel`, `AlertList`
-- review queue -> `QueueTable`, `DetailDrawer`, `AuditPanel`
+- 列表页 -> `FilterBar`、`SummaryStrip`、`DataTable`
+- 详情页 -> `ProfileCard`、`InfoGrid`、`Timeline`
+- 表单页 -> `SectionForm`、`FieldRow`、`ActionBar`
+- 仪表盘页 -> `MetricCard`、`TrendPanel`、`RankingPanel`、`AlertList`
+- 审核队列 -> `QueueTable`、`DetailDrawer`、`AuditPanel`
 
-## Decision rule
+## 脚手架标准
 
-When a request contains multiple page types, identify the primary archetype for each route before designing visuals or code.
-# Scaffold Standards
-
-## Default workspace layout
+默认工作区结构：
 
 ```text
 frontend-app/
@@ -132,7 +129,7 @@ frontend-app/
     api-contract/
 ```
 
-If the request is small, a single-app layout is acceptable:
+如果需求较小，也可采用单应用结构：
 
 ```text
 src/
@@ -147,79 +144,61 @@ src/
   mocks/
 ```
 
-## Recommended page/module split
+## 模块拆分建议
 
-- `app`: providers, router, bootstrapping
-- `pages`: route-level pages
-- `features`: business modules
-- `components`: shared UI pieces
-- `services`: API access and adapters
-- `mocks`: fixture data and mock handlers
+- `app`：providers、router、bootstrapping
+- `pages`：路由级页面
+- `features`：业务模块
+- `components`：共享 UI 组件
+- `services`：API 访问和 adapter
+- `mocks`：fixture 数据和 mock handlers
 
-## Styling rules
+## 样式规则
 
-- use tokens for color, spacing, radius, and typography
-- keep utility classes readable and composable
-- extract repeated UI patterns into components early
-- avoid random one-off CSS blocks for each page
+- 用 tokens 管理颜色、间距、圆角、字体
+- utility class 要可读、可组合
+- 重复出现的 UI 形态尽早抽成组件
+- 避免每个页面都写一堆一次性 CSS
 
-## Component layers
+## 组件层级
 
-1. `primitive`
-2. `shared component`
-3. `business component`
-4. `page composition`
+1. primitive
+2. shared component
+3. business component
+4. page composition
 
-Example:
+示例：
 
-- primitive: button, dialog, input
-- shared component: data-table, search-form, stat-card
-- business component: order-status-timeline, approval-panel
-- page composition: order list page
+- primitive：button、dialog、input
+- shared component：data-table、search-form、stat-card
+- business component：approval-panel、risk-tag-list、merchant-profile
+- page composition：商户列表页、审核工作台
 
-Naming rule:
+命名规则：
 
-- prefer reusable names at the `shared component` layer, such as `DataTable`, `FilterBar`, `SummaryStrip`
-- allow domain-specific names only at the `business component` or `page composition` layer
-- avoid treating domain-specific tables or panels as globally reusable components
+- 在 `shared component` 层尽量使用可复用名称，例如 `DataTable`、`FilterBar`、`SummaryStrip`
+- 只有 `business component` 或 `page composition` 层才允许明显的领域语义
+- 不要把领域专用面板误标成全局共享组件
 
-## State rules
+## 状态管理规则
 
-- remote data: `TanStack Query`
-- form state: `React Hook Form`
-- validation: `Zod`
-- local UI state: `useState` first
+- 远程数据：`TanStack Query`
+- 表单状态：`React Hook Form`
+- 校验：`Zod`
+- 本地 UI 状态：优先 `useState`
 
-Only add a global store when there is real cross-page client state that does not belong to the server cache.
+只有出现真正跨页面、且不属于服务端缓存的客户端状态时，再考虑全局 store。
 
-## Quality gates
+## 质量门槛
 
-Minimum:
+最低要求：
 
-- type check passes
-- build passes
-- unit/component tests for shared critical parts
-- one Playwright smoke test for major flows
+- type check 通过
+- build 通过
+- 共享关键组件具备单元/组件测试
+- 关键流程至少一条 Playwright smoke test
 
-Preferred:
+加分项：
 
-- Storybook stories for reusable business components
-- visual review of core pages before API integration
-
-## Naming rules
-
-- use business language, not vague UI names
-- routes and feature folders should map to modules the business can recognize
-- avoid folders like `misc`, `common2`, `temp-ui`
-
-## Deliverable checklist
-
-When generating a scaffold or page code, make sure the output includes:
-
-- route structure
-- layout structure
-- reusable component candidates
-- request layer placeholders
-- mock strategy
-- test entry points
-- clear follow-up docking points for backend APIs
+- 为高复用业务组件补 Storybook
+- 在 API 对接前先做核心页面视觉复核

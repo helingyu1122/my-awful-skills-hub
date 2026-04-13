@@ -1,34 +1,34 @@
-# Validation
+# 校验
 
-## Minimum checklist
+## 最低通过条件
 
-A new skill passes minimum quality only if:
+一个新 skill 只有在满足以下条件时，才算达到最低质量：
 
-- `skill.yaml` is complete
-- all required `core/` files exist
-- core files are platform-agnostic
-- at least one validation scenario exists
-- adapter generation can happen without rewriting the core files
+- `skill.yaml` 完整
+- 必需的 `core/` 文件齐全
+- `core/` 内容保持平台无关
+- 至少存在一个可复现的校验场景
+- 生成 adapters 时不需要反过来重写 `core/`
 
-## Review questions
+## 复盘问题
 
-- Is the skill solving a repeatable problem?
-- Is the source content reusable across projects?
-- Did we accidentally mix platform adapter content into core files?
-- Are examples short and clearly subordinate to the rules?
-- Could another teammate maintain this skill without asking the original author?
+- 这个 skill 解决的是不是一个重复出现的问题？
+- 源内容是否真的能跨项目复用？
+- 有没有把某个平台的 adapter 内容误塞进 `core/`？
+- 示例是否足够短，并且从属于规则本身？
+- 另一个团队成员接手时，能否不依赖原作者继续维护？
 
-## Suggested validation scenarios
+## 推荐校验场景
 
-- ideal input scenario
-- vague input scenario
-- imported rough-draft scenario
+- 理想输入场景
+- 模糊输入场景
+- 导入草稿场景
 
-## Failure conditions
+## 失败信号
 
-Refine the source content before build if:
+如果出现下面情况，应先回改源内容，再 build：
 
-- the skill is really just a project note
-- core files duplicate one another heavily
-- prompts are too vague to be reusable
-- the workflow depends on one tool's syntax
+- 这个所谓 skill 实际上只是项目笔记
+- `core/` 文件之间高度重复
+- prompt 模板过于模糊，不具备可复用性
+- 工作流强依赖单个平台语法

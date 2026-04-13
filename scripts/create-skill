@@ -8,11 +8,11 @@ ROOT="$(repo_root)"
 
 usage() {
   cat <<'EOF_USAGE'
-Usage:
+用法:
   ./scripts/create-skill <skill-id> <display-name> <summary> [--style yes|no] [--platforms codex,claude,cursor]
 
-Example:
-  ./scripts/create-skill api-error-triage "API Error Triage" "Diagnose recurring backend API failures." --style no
+示例:
+  ./scripts/create-skill api-error-triage "API 异常排查" "用于诊断重复出现的后端 API 故障。" --style no
 EOF_USAGE
 }
 
@@ -39,7 +39,7 @@ while [ $# -gt 0 ]; do
       shift 2
       ;;
     *)
-      echo "Unknown argument: $1" >&2
+      echo "未知参数: $1" >&2
       usage >&2
       exit 1
       ;;
@@ -47,13 +47,13 @@ while [ $# -gt 0 ]; do
 done
 
 if [ "$style" != "yes" ] && [ "$style" != "no" ]; then
-  echo "--style must be yes or no" >&2
+  echo "--style 只能是 yes 或 no" >&2
   exit 1
 fi
 
 DIR="$(skill_dir "$ROOT" "$skill")"
 if [ -e "$DIR" ]; then
-  echo "Skill already exists: $skill" >&2
+  echo "Skill 已存在: $skill" >&2
   exit 1
 fi
 
@@ -80,20 +80,20 @@ platforms = [p.strip() for p in os.environ['SKILL_PLATFORMS'].split(',') if p.st
 dir = root / 'skills' / skill
 skill_yaml = dir / 'skill.yaml'
 text = skill_yaml.read_text()
-text = text.replace('summary: TODO summary', f'summary: {summary}')
+text = text.replace('summary: TODO 摘要', f'summary: {summary}')
 for platform in ['codex', 'claude', 'cursor']:
     enabled = 'true' if platform in platforms else 'false'
     text = text.replace(f'  {platform}: true', f'  {platform}: {enabled}')
 skill_yaml.write_text(text)
 
 files = {
-    'intent.md': f'''# Intent\n\n## Summary\n\n{summary}\n\n## Use it for\n\n- TODO primary use case\n- TODO secondary use case\n- TODO target teammate or persona\n\n## Default assumptions\n\n- TODO assumption 1\n- TODO assumption 2\n- TODO assumption 3\n\n## Typical outputs\n\n- TODO output 1\n- TODO output 2\n- TODO output 3\n''',
-    'workflow.md': '''# Workflow\n\n## Standard flow\n\n1. TODO intake step\n2. TODO decision step\n3. TODO execution step\n4. TODO output step\n\n## Decision points\n\n- TODO decision rule 1\n- TODO decision rule 2\n\n## Output contract\n\n1. TODO output order 1\n2. TODO output order 2\n3. TODO output order 3\n''',
-    'prompts.md': '''# Prompt Templates\n\n## Template 1: Basic request\n\n```text\n请帮我使用这个 skill：\n目标: [一句话]\n输入: [用户会提供什么]\n输出: [期望产出什么]\n约束: [边界或限制]\n```\n\n## Template 2: Rough draft normalization\n\n```text\n下面是一份 rough draft，请按这个 skill 的工作流整理输出：\n[粘贴内容]\n```\n''',
-    'patterns.md': '''# Patterns\n\n## Classification\n\n- TODO classify common request types\n- TODO define reusable structures\n\n## Reusable patterns\n\n- TODO pattern 1\n- TODO pattern 2\n- TODO pattern 3\n''',
-    'style.md': '''# Style\n\nThis skill does not rely on visual style rules. Keep `style.md` minimal unless the skill later proves to need visual intake or style presets.\n''' if style == 'no' else '''# Style\n\n## Visual intake\n\n- TODO plain-language style inputs\n- TODO reference product mapping\n- TODO image-to-style rules\n\n## Presets\n\n- TODO preset 1\n- TODO preset 2\n''',
-    'validation.md': '''# Validation\n\n## Minimum checklist\n\n- TODO source files are complete\n- TODO workflow is reusable\n- TODO prompts are usable by another teammate\n\n## Validation scenarios\n\n- ideal input scenario\n- vague input scenario\n- failure or edge-case scenario\n\n## Pass conditions\n\n- TODO pass condition 1\n- TODO pass condition 2\n''',
-    'install-notes.md': '''# Install Notes\n\n## Repository policy\n\n- edit `core/` and `skill.yaml`\n- do not treat generated adapters as source of truth\n- run `./scripts/build <skill-id>` after edits\n\n## Platform notes\n\n- Codex adapter is generated under `adapters/codex/`\n- Claude adapter is generated under `adapters/claude/`\n- Cursor adapter is generated under `adapters/cursor/`\n''',
+    'intent.md': f'''# 意图\n\n## 一句话说明\n\n{summary}\n\n## 适用场景\n\n- TODO 主要场景\n- TODO 次要场景\n- TODO 目标用户或团队角色\n\n## 默认假设\n\n- TODO 假设 1\n- TODO 假设 2\n- TODO 假设 3\n\n## 典型产出\n\n- TODO 产出 1\n- TODO 产出 2\n- TODO 产出 3\n''',
+    'workflow.md': '''# 工作流\n\n## 标准流程\n\n1. TODO 输入理解\n2. TODO 判断与拆解\n3. TODO 执行主流程\n4. TODO 组织输出\n\n## 关键判断点\n\n- TODO 判断规则 1\n- TODO 判断规则 2\n\n## 输出约定\n\n1. TODO 输出顺序 1\n2. TODO 输出顺序 2\n3. TODO 输出顺序 3\n''',
+    'prompts.md': '''# Prompt 模板\n\n## 模板 1：基础请求\n\n```text\n请帮我使用这个 skill：\n目标：[一句话]\n输入：[我会提供什么]\n输出：[我希望得到什么]\n约束：[边界或限制]\n```\n\n## 模板 2：把草稿整理成标准结果\n\n```text\n下面是一份 rough draft，请按这个 skill 的工作流整理输出：\n[粘贴内容]\n```\n''',
+    'patterns.md': '''# 模式\n\n## 分类方法\n\n- TODO 归纳常见请求类型\n- TODO 定义可复用结构\n\n## 可复用模式\n\n- TODO 模式 1\n- TODO 模式 2\n- TODO 模式 3\n''',
+    'style.md': '''# 风格\n\n这个 skill 不依赖视觉风格规则。除非后续证明确实需要视觉输入或设计预设，否则请保持 `style.md` 简洁。\n''' if style == 'no' else '''# 风格\n\n## 视觉输入\n\n- TODO 纯文字风格描述如何转成设计约束\n- TODO 参考产品如何映射成可实现风格\n- TODO 图片风格如何提炼\n\n## 预设\n\n- TODO 预设 1\n- TODO 预设 2\n''',
+    'validation.md': '''# 校验\n\n## 最低检查项\n\n- TODO 源文件是否齐全\n- TODO 工作流是否可复用\n- TODO 提示模板是否便于团队成员直接使用\n\n## 校验场景\n\n- 理想输入场景\n- 模糊输入场景\n- 失败或边界场景\n\n## 通过条件\n\n- TODO 条件 1\n- TODO 条件 2\n''',
+    'install-notes.md': '''# 安装说明\n\n## 仓库约定\n\n- 编辑 `core/` 和 `skill.yaml`\n- 不要把生成后的 adapters 当作主源\n- 修改后执行 `./scripts/build <skill-id>`\n\n## 平台说明\n\n- Codex adapter 生成在 `adapters/codex/`\n- Claude adapter 生成在 `adapters/claude/`\n- Cursor adapter 生成在 `adapters/cursor/`\n''',
 }
 for filename, content in files.items():
     (dir / 'core' / filename).write_text(textwrap.dedent(content))
@@ -109,5 +109,5 @@ PY
 "$ROOT/scripts/build" "$skill" >/dev/null
 "$ROOT/scripts/doctor" "$skill"
 
-echo "created $skill"
-echo "Next step: use cross-tool-skill-creator to replace the starter TODO blocks with real reusable source content."
+echo "已创建 skill: $skill"
+echo "下一步: 使用 cross-tool-skill-creator，把 starter 里的 TODO 块替换成真正可复用的源内容。"

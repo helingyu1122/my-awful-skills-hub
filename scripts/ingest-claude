@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/lib.sh"
 ROOT="$(repo_root)"
 
 if [ $# -lt 2 ]; then
-  echo "Usage: ./scripts/ingest-claude /path/to/CLAUDE.md <skill-id>" >&2
+  echo "用法: ./scripts/ingest-claude /path/to/CLAUDE.md <skill-id>" >&2
   exit 1
 fi
 
@@ -16,7 +16,7 @@ skill="$2"
 require_skill "$ROOT" "$skill"
 
 if [ ! -f "$source_file" ]; then
-  echo "Source CLAUDE.md not found: $source_file" >&2
+  echo "未找到来源 CLAUDE.md: $source_file" >&2
   exit 1
 fi
 
@@ -25,5 +25,5 @@ stamp="$(date +%Y%m%d_%H%M%S)"
 mkdir -p "$DIR/core/imports"
 cp "$source_file" "$DIR/core/imports/claude-source-$stamp.md"
 
-echo "ingested $source_file -> $DIR/core/imports/claude-source-$stamp.md"
-echo "Next step: manually normalize the imported draft into core/*.md, then run ./scripts/build $skill"
+echo "已导入: $source_file -> $DIR/core/imports/claude-source-$stamp.md"
+echo "下一步: 把导入草稿规范化整理到 core/*.md，然后执行 ./scripts/build $skill"

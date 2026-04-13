@@ -1,29 +1,30 @@
-# Intent
+# 意图
 
-This skill is for React-first enterprise frontend work in front/back-end separated projects.
+这个 skill 用于前后端分离项目中的 React 企业前端工作，重点覆盖中后台设计、原型确认、脚手架规划与页面落地。
 
-## Use it for
+## 适用场景
 
-- enterprise admin-system scaffolding
-- page prototypes from short prompts
-- page-to-code delivery
-- design-token based UI rules
-- stable workflows for React admin apps
-- optional marketing pages when secondary to admin needs
+- 企业中后台或管理系统脚手架设计
+- 根据几句话快速产出页面原型
+- 原型确认后的页面开发与模块拆分
+- 基于 design token 的一致性界面规范
+- 团队沉淀稳定的 React 中后台交付流程
+- 次要覆盖官网内容页，但不让官网需求反客为主
 
-## Default assumptions
+## 默认假设
 
-- Prefer `React + TypeScript + Vite`
-- Primary target is `admin/back-office SPA`
-- Secondary target is `marketing/content pages`
-- Keep backend concerns out unless explicitly requested
-- Treat concrete projects as validation samples, not as the skill's permanent shape
+- 默认技术基线为 `React + TypeScript + Vite`
+- 主要目标是 `admin/back-office SPA`
+- 官网或内容站只是补充场景，不是主战场
+- 未明确要求时，不主动展开后端实现细节
+- 具体项目只作为验证样本，不应反向固化 skill 的边界
 
-## Typical outputs
+## 典型产出
 
-- visual decision card
-- stack and scaffold proposal
-- route and module tree
-- page prototype description
-- component inventory
-- API docking assumptions
+- 视觉决策卡
+- 技术栈与脚手架建议
+- 路由与模块树
+- 页面原型说明
+- 页面模式归类
+- 可复用组件清单
+- API 对接边界假设

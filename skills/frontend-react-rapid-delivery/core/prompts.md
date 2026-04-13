@@ -1,8 +1,8 @@
-# Prompt Templates
+# Prompt 模板
 
-## Template 1: Short business prompt
+## 模板 1：简短业务描述
 
-Use this when you want the skill to infer most of the structure.
+当你希望 skill 自行推断大部分结构时，直接这样说：
 
 ```text
 做一个 [系统名称] 的中后台。
@@ -13,9 +13,9 @@ Use this when you want the skill to infer most of the structure.
 先给我原型方案，不要急着接后端。
 ```
 
-## Template 2: Prototype-first prompt
+## 模板 2：原型优先
 
-Use this when you want a more controlled prototype output.
+当你希望原型输出更可控时，使用：
 
 ```text
 请用 React-first 的企业中后台方案，给我设计一个 [系统名称]。
@@ -31,9 +31,9 @@ Use this when you want a more controlled prototype output.
 4. 不写后端
 ```
 
-## Template 2A: Prototype with style guidance
+## 模板 3：带风格要求的原型
 
-Use this when you want the skill to translate visual intent before prototyping.
+当你希望先把视觉方向说清楚时，使用：
 
 ```text
 请用 React-first 的企业中后台方案，给我设计一个 [系统名称]。
@@ -54,9 +54,9 @@ Use this when you want the skill to translate visual intent before prototyping.
 5. 不写后端
 ```
 
-## Template 2C: Blue-toned admin prompt
+## 模板 4：蓝灰忧郁风中后台
 
-Use this when you want a calm blue-gray enterprise backend style.
+当你想要“蓝色忧郁、偏蓝灰、不土”的企业中后台时，使用：
 
 ```text
 请用 React-first 的企业中后台方案，给我设计一个 [系统名称]。
@@ -75,9 +75,9 @@ Use this when you want a calm blue-gray enterprise backend style.
 4. 再给组件清单
 ```
 
-## Template 2B: Image-driven style prompt
+## 模板 5：参考图驱动的风格抽取
 
-Use this when you have screenshots or reference images.
+当你手里有截图或参考图时，使用：
 
 ```text
 我会给你 1 到 3 张参考图。
@@ -94,9 +94,9 @@ Use this when you have screenshots or reference images.
 - 明确告诉我哪些元素应该借鉴，哪些不要照搬
 ```
 
-## Template 3: Scaffold prompt
+## 模板 6：脚手架生成
 
-Use this when you want project structure and starter code.
+当你要生成项目结构和 starter 代码时，使用：
 
 ```text
 基于 React + TypeScript + Vite + TanStack Query + React Hook Form + Zod + Tailwind，
@@ -112,9 +112,9 @@ Use this when you want project structure and starter code.
 - 测试基线
 ```
 
-## Template 4: From prototype to code
+## 模板 7：从原型进入代码
 
-Use this after the prototype is accepted.
+当原型确认后，使用：
 
 ```text
 按刚才确认的原型，开始生成前端页面代码。
@@ -126,9 +126,9 @@ Use this after the prototype is accepted.
 - 组件尽量可复用
 ```
 
-## Template 5: Skill validation prompt
+## 模板 8：用业务样本验证 skill 本身
 
-Use this when the goal is to test and improve the skill itself, not just produce one page.
+当你的目标是验证和改进 skill，而不是只产出一次页面时，使用：
 
 ```text
 把下面这个需求当成一次 skill 验证样本，而不是单次项目交付。
@@ -144,16 +144,16 @@ Use this when the goal is to test and improve the skill itself, not just produce
 [在这里放业务描述]
 ```
 
-## Expected output order
+## 默认输出顺序
 
-For vague prompts, the skill should respond in this order:
+对于较模糊的请求，skill 默认按下面顺序响应：
 
-1. visual decision card if style is mentioned
-2. product goal
-3. route tree
-4. module breakdown
-5. page prototype notes
-6. component inventory
-7. implementation suggestion
+1. 风格相关时先给视觉决策卡
+2. 产品目标
+3. 路由树
+4. 模块拆解
+5. 页面原型说明
+6. 组件清单
+7. 实现建议
 
-Do not start with large amounts of code unless the user explicitly asks for code first.
+除非用户明确要求先出代码，否则不要一上来就输出大量实现代码。

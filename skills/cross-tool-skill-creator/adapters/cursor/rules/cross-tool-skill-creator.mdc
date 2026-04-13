@@ -1,71 +1,71 @@
 ---
-description: Create platform-agnostic skill source content that can be adapted to Codex, Claude Code, and Cursor.
+description: 创建可同时适配 Codex、Claude Code 和 Cursor 的跨工具 skill 源内容。
 alwaysApply: false
 ---
 
-# Cross Tool Skill Creator
+# 跨工具 Skill 创建器
 
-## Workflow
+## 工作流
 
-- Define the skill boundary before writing any adapter content.
-- Produce `skill.yaml` and `core/*.md` drafts before build output.
-- Keep platform-specific syntax out of the core files.
-- Treat adapters as generated artifacts, not source of truth.
+- 先界定 skill 的边界，再组织 adapter 内容。
+- 先产出 `skill.yaml` 和 `core/*.md`，再生成 adapter。
+- 平台特有语法不要写进 `core/` 主源。
+- 把 adapters 当成生成产物，不要当成主源手工维护。
 
-## Intent
+## 意图
 
-  # Intent
+  # 意图
   
-  This skill is for creating new skills in the `skills-repo` format.
+  这个 skill 用于创建符合 `skills-repo` 规范、可被 Codex、Claude Code、Cursor 共同消费的新 skill 源内容。
   
-  ## Use it for
+  ## 适用场景
   
-  - defining new cross-tool skills
-  - converting a rough idea into `core/` source files
-  - normalizing skill drafts from Claude Code or project notes
-  - enforcing repository structure before adapter generation
-  - helping team members write reusable skill source content
+  - 定义新的跨工具 skill
+  - 把一个模糊想法落成 `core/` 源文件
+  - 把 Claude Code 或项目笔记里的草稿规范化整理
+  - 在生成 adapters 之前，先把仓库结构和边界理顺
+  - 帮助团队成员持续产出可复用的 skill 内容，而不是一次性说明文档
   
-  ## Default assumptions
+  ## 默认假设
   
-  - `core/` is the source of truth
-  - adapters are generated artifacts
-  - the goal is cross-tool reuse, not one-platform optimization first
-  - examples are validation samples, not permanent structure
+  - `core/` 是唯一可信源
+  - adapters 是生成产物
+  - 目标是跨工具复用，而不是先为某个平台做过度定制
+  - 示例只是验证样本，不是永久写死的结构
   
-  ## Typical outputs
+  ## 典型产出
   
   - `skill.yaml`
   - `core/intent.md`
   - `core/workflow.md`
   - `core/prompts.md`
   - `core/patterns.md`
-  - `core/style.md` when relevant
+  - `core/style.md`（仅在确实需要视觉规则时）
   - `core/validation.md`
   - `core/install-notes.md`
 
-## Style
+## 风格
 
-  # Style
+  # 风格
   
-  Most skills do not need `style.md`.
+  大多数 skill 并不需要复杂的 `style.md`。
   
-  Create `style.md` only if the skill depends on:
+  只有当 skill 明确依赖这些能力时，才应该把 `style.md` 写成完整模块：
   
-  - visual direction
-  - style translation from plain language
-  - reference-image interpretation
-  - output aesthetics or design constraints
+  - 视觉方向定义
+  - 白话风格翻译
+  - 参考图或截图风格提炼
+  - 审美或设计约束
   
-  If the skill is not visual in nature, omit style-specific complexity and keep the file minimal.
+  如果 skill 本身并非视觉类，请保持 `style.md` 极简，避免引入无意义复杂度。
   
-  ## If style is needed
+  ## 当确实需要 style.md 时
   
-  Keep it reusable:
+  优先保证内容可复用：
   
-  - visual intake rules
-  - presets
-  - translation of plain-language style requests
-  - image-to-style extraction rules
+  - 视觉输入规则
+  - 风格预设
+  - 白话风格到设计约束的映射
+  - 图片到风格特征的提炼规则
   
-  Do not fill `style.md` with project-specific brand details unless the skill is explicitly brand-bound.
+  除非 skill 本身就是品牌专属，否则不要在这里写死项目品牌细节。

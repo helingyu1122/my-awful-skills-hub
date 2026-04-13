@@ -1,7 +1,7 @@
 id: frontend-react-rapid-delivery
-name: Frontend React Rapid Delivery
+name: React 企业前端快速交付
 version: 0.1.0
-summary: React-first enterprise frontend design, prototype, and page delivery workflow.
+summary: 面向企业中后台的 React 前端设计、原型与页面交付工作流。
 platforms:
   codex: true
   claude: true
