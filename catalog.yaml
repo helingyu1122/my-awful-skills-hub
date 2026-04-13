@@ -1,0 +1,18 @@
+version: 0.1.0
+skills:
+  - id: frontend-react-rapid-delivery
+    name: Frontend React Rapid Delivery
+    version: 0.1.0
+    summary: React-first enterprise frontend design, prototype, and page delivery workflow.
+    platforms:
+      codex: true
+      claude: true
+      cursor: true
+  - id: cross-tool-skill-creator
+    name: Cross Tool Skill Creator
+    version: 0.1.0
+    summary: Create platform-agnostic skill source content that can be adapted to Codex, Claude Code, and Cursor.
+    platforms:
+      codex: true
+      claude: true
+      cursor: true

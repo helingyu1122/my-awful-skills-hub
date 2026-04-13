@@ -1,0 +1,60 @@
+#!/bin/bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# shellcheck source=/dev/null
+source "$SCRIPT_DIR/lib.sh"
+ROOT="$(repo_root)"
+
+if [ $# -lt 2 ]; then
+  echo "Usage: ./scripts/install <codex|claude|cursor> <skill-id> [--project /path/to/project]" >&2
+  exit 1
+fi
+
+tool="$1"
+skill="$2"
+shift 2
+project=""
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --project)
+      project="$2"
+      shift 2
+      ;;
+    *)
+      echo "Unknown argument: $1" >&2
+      exit 1
+      ;;
+  esac
+done
+
+require_skill "$ROOT" "$skill"
+"$ROOT/scripts/build" "$skill" >/dev/null
+SKILL_DIR="$(skill_dir "$ROOT" "$skill")"
+
+case "$tool" in
+  codex)
+    target="$HOME/.codex/skills/$skill"
+    safe_symlink "$SKILL_DIR/adapters/codex" "$target"
+    ;;
+  claude)
+    if [ -z "$project" ]; then
+      echo "--project is required for claude install" >&2
+      exit 1
+    fi
+    safe_symlink "$SKILL_DIR/adapters/claude/CLAUDE.md" "$project/CLAUDE.md"
+    ;;
+  cursor)
+    if [ -z "$project" ]; then
+      echo "--project is required for cursor install" >&2
+      exit 1
+    fi
+    safe_symlink "$SKILL_DIR/adapters/cursor/rules/$skill.mdc" "$project/.cursor/rules/$skill.mdc"
+    safe_symlink "$SKILL_DIR/adapters/cursor/AGENTS.md" "$project/AGENTS.md"
+    ;;
+  *)
+    echo "Unsupported tool: $tool" >&2
+    exit 1
+    ;;
+esac

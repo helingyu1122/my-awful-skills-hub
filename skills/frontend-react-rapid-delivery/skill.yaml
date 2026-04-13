@@ -1,0 +1,23 @@
+id: frontend-react-rapid-delivery
+name: Frontend React Rapid Delivery
+version: 0.1.0
+summary: React-first enterprise frontend design, prototype, and page delivery workflow.
+platforms:
+  codex: true
+  claude: true
+  cursor: true
+core:
+  intent: core/intent.md
+  workflow: core/workflow.md
+  prompts: core/prompts.md
+  patterns: core/patterns.md
+  style: core/style.md
+  validation: core/validation.md
+  install_notes: core/install-notes.md
+adapters:
+  codex:
+    enabled: true
+  claude:
+    enabled: true
+  cursor:
+    enabled: true

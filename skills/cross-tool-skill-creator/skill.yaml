@@ -1,0 +1,23 @@
+id: cross-tool-skill-creator
+name: Cross Tool Skill Creator
+version: 0.1.0
+summary: Create platform-agnostic skill source content that can be adapted to Codex, Claude Code, and Cursor.
+platforms:
+  codex: true
+  claude: true
+  cursor: true
+core:
+  intent: core/intent.md
+  workflow: core/workflow.md
+  prompts: core/prompts.md
+  patterns: core/patterns.md
+  style: core/style.md
+  validation: core/validation.md
+  install_notes: core/install-notes.md
+adapters:
+  codex:
+    enabled: true
+  claude:
+    enabled: true
+  cursor:
+    enabled: true

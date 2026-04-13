@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+if [ $# -lt 2 ]; then
+  echo "Usage: ./scripts/update <codex|claude|cursor> <skill-id> [--project /path/to/project]" >&2
+  exit 1
+fi
+
+"$ROOT/scripts/build" "$2"
+"$ROOT/scripts/install" "$@"

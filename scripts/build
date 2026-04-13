@@ -1,0 +1,186 @@
+#!/bin/bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# shellcheck source=/dev/null
+source "$SCRIPT_DIR/lib.sh"
+ROOT="$(repo_root)"
+
+codex_intro() {
+  local skill="$1"
+  case "$skill" in
+    cross-tool-skill-creator)
+      cat <<'EOF_INTRO'
+Use this skill when the user wants to create a new cross-tool skill source package in the `skills-repo` format.
+
+## Default Output Order
+
+1. skill name and summary
+2. boundary and use cases
+3. skill.yaml draft
+4. core file drafts
+5. validation scenarios
+6. adapter generation next steps
+EOF_INTRO
+      ;;
+    *)
+      cat <<'EOF_INTRO'
+Use this skill when the user wants a reusable enterprise frontend workflow centered on React and front/back-end separation.
+
+## Default Output Order
+
+1. visual decision card when style matters
+2. product goal
+3. route and module tree
+4. page archetype mapping
+5. component inventory
+6. scaffold or page plan
+7. API docking assumptions
+EOF_INTRO
+      ;;
+  esac
+}
+
+cursor_workflow() {
+  local skill="$1"
+  case "$skill" in
+    cross-tool-skill-creator)
+      cat <<'EOF_CURSOR_WORKFLOW'
+- Define the skill boundary before writing any adapter content.
+- Produce `skill.yaml` and `core/*.md` drafts before build output.
+- Keep platform-specific syntax out of the core files.
+- Treat adapters as generated artifacts, not source of truth.
+EOF_CURSOR_WORKFLOW
+      ;;
+    *)
+      cat <<'EOF_CURSOR_WORKFLOW'
+- Produce a visual decision card when style matters.
+- Output product goal, route tree, page prototype, page archetypes, and reusable component inventory before large code output.
+- Preserve front/back-end separation.
+- Prefer enterprise admin norms over decorative dashboard styling.
+EOF_CURSOR_WORKFLOW
+      ;;
+  esac
+}
+
+build_one() {
+  local skill="$1"
+  local dir
+  local name
+  local summary
+  dir="$(skill_dir "$ROOT" "$skill")"
+  require_skill "$ROOT" "$skill"
+
+  name="$(yaml_value "$dir/skill.yaml" name)"
+  summary="$(yaml_value "$dir/skill.yaml" summary)"
+
+  mkdir -p "$dir/adapters/codex/agents" "$dir/adapters/codex/references" "$dir/adapters/claude" "$dir/adapters/cursor/rules"
+
+  cp "$dir/core/workflow.md" "$dir/adapters/codex/references/workflow.md"
+  cp "$dir/core/prompts.md" "$dir/adapters/codex/references/prompts.md"
+  cp "$dir/core/patterns.md" "$dir/adapters/codex/references/patterns.md"
+  cp "$dir/core/style.md" "$dir/adapters/codex/references/style.md"
+  cp "$dir/core/validation.md" "$dir/adapters/codex/references/validation.md"
+  cp "$dir/core/install-notes.md" "$dir/adapters/codex/references/install-notes.md"
+
+  cat <<EOF_SKILL > "$dir/adapters/codex/SKILL.md"
+---
+name: $skill
+description: $summary
+---
+
+# $name
+
+$(codex_intro "$skill")
+
+## References
+
+- [workflow](references/workflow.md)
+- [prompts](references/prompts.md)
+- [patterns](references/patterns.md)
+- [style](references/style.md)
+- [validation](references/validation.md)
+- [install-notes](references/install-notes.md)
+EOF_SKILL
+
+  cat <<EOF_UI > "$dir/adapters/codex/agents/openai.yaml"
+display_name: "$name"
+short_description: "$summary"
+default_prompt: "Use the generated adapter guidance and the referenced core files for this skill."
+EOF_UI
+
+  cat <<EOF_CLAUDE > "$dir/adapters/claude/CLAUDE.md"
+# $name
+
+$summary
+
+## Intent
+
+$(cat "$dir/core/intent.md")
+
+## Workflow
+
+$(cat "$dir/core/workflow.md")
+
+## Prompts
+
+$(cat "$dir/core/prompts.md")
+
+## Patterns
+
+$(cat "$dir/core/patterns.md")
+
+## Style
+
+$(cat "$dir/core/style.md")
+
+## Validation
+
+$(cat "$dir/core/validation.md")
+
+## Install Notes
+
+$(cat "$dir/core/install-notes.md")
+EOF_CLAUDE
+
+  cat <<EOF_CURSOR > "$dir/adapters/cursor/rules/$skill.mdc"
+---
+description: $summary
+alwaysApply: false
+---
+
+# $name
+
+## Workflow
+
+$(cursor_workflow "$skill")
+
+## Intent
+
+$(sed 's/^/  /' "$dir/core/intent.md")
+
+## Style
+
+$(sed 's/^/  /' "$dir/core/style.md")
+EOF_CURSOR
+
+  cat <<EOF_AGENTS > "$dir/adapters/cursor/AGENTS.md"
+# $name
+
+$summary
+
+Use the generated Cursor rule file for detailed instructions:
+
+- .cursor/rules/$skill.mdc
+EOF_AGENTS
+
+  echo "built $skill"
+}
+
+if [ $# -eq 0 ]; then
+  while IFS= read -r skill; do
+    build_one "$skill"
+  done < <(list_skills "$ROOT")
+else
+  build_one "$1"
+fi

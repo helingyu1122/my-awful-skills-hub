@@ -1,0 +1,3 @@
+display_name: "Cross Tool Skill Creator"
+short_description: "Create platform-agnostic skill source content that can be adapted to Codex, Claude Code, and Cursor."
+default_prompt: "Use the generated adapter guidance and the referenced core files for this skill."

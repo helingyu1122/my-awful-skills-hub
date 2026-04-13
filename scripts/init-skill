@@ -1,0 +1,60 @@
+#!/bin/bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# shellcheck source=/dev/null
+source "$SCRIPT_DIR/lib.sh"
+ROOT="$(repo_root)"
+
+if [ $# -lt 2 ]; then
+  echo "Usage: ./scripts/init-skill <skill-id> <display-name>" >&2
+  exit 1
+fi
+
+skill="$1"
+name="$2"
+dir="$(skill_dir "$ROOT" "$skill")"
+
+if [ -e "$dir" ]; then
+  echo "Skill already exists: $skill" >&2
+  exit 1
+fi
+
+mkdir -p "$dir/core" "$dir/adapters/codex/agents" "$dir/adapters/cursor/rules" "$dir/adapters/claude"
+cat <<EOF_SKILL > "$dir/skill.yaml"
+id: $skill
+name: $name
+version: 0.1.0
+summary: TODO summary
+platforms:
+  codex: true
+  claude: true
+  cursor: true
+core:
+  intent: core/intent.md
+  workflow: core/workflow.md
+  prompts: core/prompts.md
+  patterns: core/patterns.md
+  style: core/style.md
+  validation: core/validation.md
+  install_notes: core/install-notes.md
+adapters:
+  codex:
+    enabled: true
+  claude:
+    enabled: true
+  cursor:
+    enabled: true
+EOF_SKILL
+
+for file in intent workflow prompts patterns style validation install-notes; do
+  title="$(printf '%s' "$file" | awk '{print toupper(substr($0,1,1)) substr($0,2)}')"
+  cat <<EOF_FILE > "$dir/core/$file.md"
+# $title
+
+TODO
+EOF_FILE
+done
+
+echo "initialized $dir"
+echo "Next steps: fill core/*.md, update catalog.yaml, then run ./scripts/build $skill"

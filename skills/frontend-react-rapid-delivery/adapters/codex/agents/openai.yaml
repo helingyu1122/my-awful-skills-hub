@@ -1,0 +1,3 @@
+display_name: "Frontend React Rapid Delivery"
+short_description: "React-first enterprise frontend design, prototype, and page delivery workflow."
+default_prompt: "Use the generated adapter guidance and the referenced core files for this skill."
