@@ -1,0 +1,3 @@
+display_name: "迭代式前端交付"
+short_description: "面向需求不完整、边做边改场景的前端迭代交付与每轮质量门禁工作流。"
+default_prompt: "请结合这个 adapter 的说明和引用的 core 文件来使用该 skill。"

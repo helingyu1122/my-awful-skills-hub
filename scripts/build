@@ -9,6 +9,19 @@ ROOT="$(repo_root)"
 codex_intro() {
   local skill="$1"
   case "$skill" in
+    iterative-ui-delivery)
+      cat <<'EOF_INTRO'
+当用户需求不完整、经常边看边改，且希望每轮迭代都有明确质量门禁时，使用这个 skill。
+
+## 默认输出顺序
+
+1. 本轮 Mini Brief（目标/用户动作/验收信号）
+2. 最小改动实现方案
+3. 改动后验证结果（build/ux/behavior/boundary）
+4. 本轮变更记录
+5. 下一轮建议
+EOF_INTRO
+      ;;
     cross-tool-skill-creator)
       cat <<'EOF_INTRO'
 当用户希望创建一个符合 `skills-repo` 规范、可跨工具复用的新 skill 源包时，使用这个 skill。
@@ -44,6 +57,14 @@ EOF_INTRO
 cursor_workflow() {
   local skill="$1"
   case "$skill" in
+    iterative-ui-delivery)
+      cat <<'EOF_CURSOR_WORKFLOW'
+- 先把需求写成 3 行 Mini Brief，再开始实现。
+- 每轮只做一个小增量，避免大面积同时改动。
+- 每轮必须做 build/ux/behavior/boundary 四项门禁检查。
+- 需求不清晰时，先把口语反馈改写成可执行改动项。
+EOF_CURSOR_WORKFLOW
+      ;;
     cross-tool-skill-creator)
       cat <<'EOF_CURSOR_WORKFLOW'
 - 先界定 skill 的边界，再组织 adapter 内容。

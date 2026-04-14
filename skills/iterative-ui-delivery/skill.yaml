@@ -1,0 +1,23 @@
+id: iterative-ui-delivery
+name: 迭代式前端交付
+version: 0.1.0
+summary: 面向需求不完整、边做边改场景的前端迭代交付与每轮质量门禁工作流。
+platforms:
+  codex: true
+  claude: true
+  cursor: true
+core:
+  intent: core/intent.md
+  workflow: core/workflow.md
+  prompts: core/prompts.md
+  patterns: core/patterns.md
+  style: core/style.md
+  validation: core/validation.md
+  install_notes: core/install-notes.md
+adapters:
+  codex:
+    enabled: true
+  claude:
+    enabled: true
+  cursor:
+    enabled: true
